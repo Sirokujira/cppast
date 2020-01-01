@@ -1,0 +1,145 @@
+cppast による cpp/h ファイル解析 ～ pxd 生成について
+----------------------------------------------------
+
+autopxd クラスを用意して、そちらでファイルの Open/Close を行う。
+ファイルへの書き出しは、 C++ の fstream を使う。
+
+main.cpp では AutoPxd クラスをグローバル変数でアクセスする。
+
+0. 判断の大本について
+   0-a. kind 文字列(enum値?)から種類を判断。
+        namespace の場合、階層を保持する仕組みを用意しておく。(stack)
+
+   0-b. 
+
+
+   0-c. 
+
+
+---
+
+1. ヘッダファイルの扱いについて
+   type = include directive の場合
+
+#include <memory>
+↓
+import libcpp.～
+
+※ もしくはテーブルを持つ?
+
+# 標準
+import ～
+
+# カスタム
+#include <Core/Registration/GlobalOptimizationMethod.h>
+n 階層
+from Core.Registration import GlobalOptimizationMethod
+1 階層
+import GlobalOptimizationMethod
+※ インクルードパスによっては、フォルダも含めて対応をしているケースもあるが
+   自動化で実装する際の対応はどうするか?
+
+※ 標準側 : whitelist を用意する?
+
+---
+
+n. クラス自体の継承について
+   基底クラスを取得することが可能か調査する必要がある。
+
+2. クラス内のアクセス権限によるコード生成に関して
+type = access specifier
+
+access specifier(public)
+・同一階層 + define は pxd として書き込む。
+・更新が発生するまでは pxd に書き込む。
+  access specifier の値
+  class から抜ける(stack -1?)
+
+access specifier(private/protected)
+・pxd には書き込まない。
+
+---
+
+3. クラス内の関数/変数のコード生成対応について
+
+constructor
+※ public 以外の対応は?
+※ 複数のコンストラクタがある場合の対応をどうするか
+
+destructor
+※ public 以外の対応は?
+
+member function
+member variable
+※ どこまで対応する?
+
+function
+※ operator 関連は対応する?
+
+---
+
+4. カスタムクラスの戻り値の対応
+
+   変更元 : Eigen::Vector3f
+   ↓
+   変更先 : eigen.Vector3f
+
+---
+
+調べる項目
+cppast::cpp_entity(src/cpp_entiny.cpp)
+cppast::visitor_info(include\cppast\visitor.hpp)
+内部
+cppast::code_generator
+※ ファイルとして書き出す場合の対応(継承して使う)
+の3つ
+
+cpp の場合は, pyx として実装する?
+⇒ 難しそうなため、とりあえずは行わない。
+
+---
+
+[define] の扱いについて
+・最初のヘッダ回避の部分はどう判断する？(#ifndef ～ #define ～ #endif)
+  ⇒ 値が定義されていないものは、とりあえず無視する形にするしかない？
+・
+
+---
+
+const output& operator<< の中で使用している関数を override する。
+
+do_write_token_seq では、手遅れ?(文字列としてわたっているため)
+
+下記項目を override して使う
+(引数は文字列だが、上位の判断まではわかるため)
+(通常は、do_write_token_seq で対応している)
+void do_write_keyword(string_view str) override 
+void do_write_identifier(string_view str) override 
+void do_write_reference(string_view str) override 
+void do_write_punctuation(string_view str) override 
+void do_write_str_literal(string_view str) override 
+void do_write_int_literal(string_view str) override 
+void do_write_float_literal(string_view str) override 
+void do_write_preprocessor(string_view str) override 
+void do_write_comment(string_view str) override 
+
+---
+memo 
+
+[調査用]toolファイル編集コマンド
+vim ~/cppast/tool/main.cpp
+
+---
+
+ソースコード更新
+cd ~/cppast
+git submodule init
+git submodule update -i
+
+---
+
+example 実行?
+
+compile_commands.json
+
+/home/sirokujira/cppast/build/example/cppast_example_ast_printer compile_commands.json

@@ -1,0 +1,17 @@
+使い方
+
+./cppast [ファイル名] -I [インクルードパス] [-I [インクルードパス]]
+
+// draco ライブラリの場合
+./cppast [ファイル名] -I ~/draco_py/draco/src
+
+// 実行パス
+~/cppast/_build/autopxd/autopxd/cppast_autopxd --file (ファイル名) -I (includePath)
+
+~/cppast/_build/autopxd/cppast_autopxd --database_dir ~/pcl/_build --file /usr/local/include/pcl-1.9/pcl/point_types.h -I /usr/local/include/pcl-1.9
+--remove_comments_in_macro=
+
+
+
+フルパス取得(windows コマンド)
+dir /b /s *.h > h.txt

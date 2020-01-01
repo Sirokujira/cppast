@@ -1,0 +1,539 @@
+// default cppast tool
+~/cppast/build/tool/cppast ~/draco_py/draco/src/draco/attributes/attribute_octahedron_transform.cc -I ~/draco_py/draco/src
+
+// cpp
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/attribute_octahedron_transform.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/attribute_quantization_transform.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/attribute_transform.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/geometry_attribute.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/point_attribute.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/point_attribute_test.cc -I ~/draco_py/draco/src
+
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/decode.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/decode_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/encode.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/encode_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/expert_encode.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/attributes_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/attributes_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/kd_tree_attributes_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/kd_tree_attributes_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_decoders_controller.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_encoders_controller.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_integer_attribute_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_integer_attribute_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_integer_attribute_encoding_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_normal_attribute_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_normal_attribute_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_quantization_attribute_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_quantization_attribute_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_encoder_factory.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_canonicalized_transform_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_transform_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/config/decoder_options_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_decoder_impl.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_encoder_impl.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_encoding_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_encoder_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_sequential_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_sequential_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_kd_tree_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_kd_tree_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_kd_tree_encoding_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_sequential_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_sequential_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_sequential_encoding_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/dynamic_integer_points_kd_tree_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/dynamic_integer_points_kd_tree_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/float_points_tree_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/float_points_tree_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/integer_points_kd_tree_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/integer_points_kd_tree_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/buffer_bit_coding_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/cycle_timer.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/data_buffer.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/decoder_buffer.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/divide.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/draco_tests.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/draco_test_utils.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/draco_types.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/encoder_buffer.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/hash_utils.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/math_utils_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/options.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/quantization_utils.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/quantization_utils_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/shannon_entropy.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/status_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/symbol_coding_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/symbol_coding_utils.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/symbol_decoding.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/symbol_encoding.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/vector_d_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/adaptive_rans_bit_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/adaptive_rans_bit_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/direct_bit_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/direct_bit_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/rans_bit_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/rans_bit_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/rans_coding_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/symbol_bit_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/symbol_bit_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/mesh_io.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/obj_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/obj_decoder_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/obj_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/obj_encoder_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/parser_utils.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_decoder_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_reader.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_reader_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/point_cloud_io.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/point_cloud_io_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/javascript/emscripten/decoder_webidl_wrapper.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/javascript/emscripten/draco_decoder_glue_wrapper.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/javascript/emscripten/draco_encoder_glue_wrapper.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/javascript/emscripten/encoder_webidl_wrapper.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/corner_table.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_are_equivalent.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_are_equivalent_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_attribute_corner_table.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_cleanup.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_cleanup_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_misc_functions.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_stripifier.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/triangle_soup_mesh_builder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/triangle_soup_mesh_builder_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/geometry_metadata.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/metadata.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/metadata_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/metadata_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/metadata_encoder_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/metadata_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/point_cloud/point_cloud.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/point_cloud/point_cloud_builder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/point_cloud/point_cloud_builder_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/point_cloud/point_cloud_test.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/tools/draco_decoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/tools/draco_encoder.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/unity/draco_unity_plugin.cc -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/unity/draco_unity_plugin_test.cc -I ~/draco_py/draco/src
+
+vim ~/draco_py/draco/src/draco/attributes/attribute_octahedron_transform.cc.pxd
+
+// h
+// raw
+~/draco_py/draco/src/draco/attributes/attribute_octahedron_transform.h
+~/draco_py/draco/src/draco/attributes/attribute_quantization_transform.h
+~/draco_py/draco/src/draco/attributes/attribute_transform.h
+~/draco_py/draco/src/draco/attributes/attribute_transform_data.h
+~/draco_py/draco/src/draco/attributes/attribute_transform_type.h
+~/draco_py/draco/src/draco/attributes/geometry_attribute.h
+~/draco_py/draco/src/draco/attributes/geometry_indices.h
+~/draco_py/draco/src/draco/attributes/point_attribute.h
+~/draco_py/draco/src/draco/compression/decode.h
+~/draco_py/draco/src/draco/compression/encode.h
+~/draco_py/draco/src/draco/compression/encode_base.h
+~/draco_py/draco/src/draco/compression/expert_encode.h
+~/draco_py/draco/src/draco/compression/attributes/attributes_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/attributes_decoder_interface.h
+~/draco_py/draco/src/draco/compression/attributes/attributes_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/kd_tree_attributes_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/kd_tree_attributes_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/kd_tree_attributes_shared.h
+~/draco_py/draco/src/draco/compression/attributes/linear_sequencer.h
+~/draco_py/draco/src/draco/compression/attributes/mesh_attribute_indices_encoding_data.h
+~/draco_py/draco/src/draco/compression/attributes/mesh_attribute_indices_encoding_observer.h
+~/draco_py/draco/src/draco/compression/attributes/mesh_traversal_sequencer.h
+~/draco_py/draco/src/draco/compression/attributes/normal_compression_utils.h
+~/draco_py/draco/src/draco/compression/attributes/points_sequencer.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_decoders_controller.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_encoders_controller.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_integer_attribute_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_integer_attribute_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_normal_attribute_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_normal_attribute_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_quantization_attribute_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/sequential_quantization_attribute_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_constrained_multi_parallelogram_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_constrained_multi_parallelogram_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_constrained_multi_parallelogram_shared.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_data.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_geometric_normal_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_geometric_normal_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_geometric_normal_predictor_area.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_geometric_normal_predictor_base.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_multi_parallelogram_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_multi_parallelogram_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_parallelogram_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_parallelogram_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_parallelogram_shared.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_portable_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_portable_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_portable_predictor.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_decoder_factory.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_decoder_interface.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_decoding_transform.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_delta_decoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_delta_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_encoder.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_encoder_factory.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_encoder_interface.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_encoding_transform.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_factory.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_interface.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_canonicalized_decoding_transform.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_canonicalized_encoding_transform.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_canonicalized_transform_base.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_decoding_transform.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_encoding_transform.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_transform_base.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_wrap_decoding_transform.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_wrap_encoding_transform.h
+~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_wrap_transform_base.h
+~/draco_py/draco/src/draco/compression/config/compression_shared.h
+~/draco_py/draco/src/draco/compression/config/decoder_options.h
+~/draco_py/draco/src/draco/compression/config/draco_options.h
+~/draco_py/draco/src/draco/compression/config/encoder_options.h
+~/draco_py/draco/src/draco/compression/config/encoding_features.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_decoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_decoder_helpers.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_decoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_decoder_impl.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_decoder_impl_interface.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_encoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_encoder_impl.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_encoder_impl_interface.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_shared.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_decoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_encoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_predictive_decoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_predictive_encoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_valence_decoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_valence_encoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_encoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_encoder_helpers.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_sequential_decoder.h
+~/draco_py/draco/src/draco/compression/mesh/mesh_sequential_encoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_decoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_encoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_kd_tree_decoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_kd_tree_encoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_sequential_decoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_sequential_encoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/dynamic_integer_points_kd_tree_decoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/dynamic_integer_points_kd_tree_encoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/float_points_tree_decoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/float_points_tree_encoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/integer_points_kd_tree_decoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/integer_points_kd_tree_encoder.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/point_cloud_compression_method.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/point_cloud_types.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/quantize_points_3.h
+~/draco_py/draco/src/draco/compression/point_cloud/algorithms/queuing_policy.h
+~/draco_py/draco/src/draco/core/ans.h
+~/draco_py/draco/src/draco/core/bit_utils.h
+~/draco_py/draco/src/draco/core/cycle_timer.h
+~/draco_py/draco/src/draco/core/data_buffer.h
+~/draco_py/draco/src/draco/core/decoder_buffer.h
+~/draco_py/draco/src/draco/core/divide.h
+~/draco_py/draco/src/draco/core/draco_index_type.h
+~/draco_py/draco/src/draco/core/draco_index_type_vector.h
+~/draco_py/draco/src/draco/core/draco_test_base.h
+~/draco_py/draco/src/draco/core/draco_test_utils.h
+~/draco_py/draco/src/draco/core/draco_types.h
+~/draco_py/draco/src/draco/core/draco_version.h
+~/draco_py/draco/src/draco/core/encoder_buffer.h
+~/draco_py/draco/src/draco/core/hash_utils.h
+~/draco_py/draco/src/draco/core/macros.h
+~/draco_py/draco/src/draco/core/math_utils.h
+~/draco_py/draco/src/draco/core/options.h
+~/draco_py/draco/src/draco/core/quantization_utils.h
+~/draco_py/draco/src/draco/core/rans_symbol_coding.h
+~/draco_py/draco/src/draco/core/rans_symbol_decoder.h
+~/draco_py/draco/src/draco/core/rans_symbol_encoder.h
+~/draco_py/draco/src/draco/core/shannon_entropy.h
+~/draco_py/draco/src/draco/core/status.h
+~/draco_py/draco/src/draco/core/statusor.h
+~/draco_py/draco/src/draco/core/symbol_coding_utils.h
+~/draco_py/draco/src/draco/core/symbol_decoding.h
+~/draco_py/draco/src/draco/core/symbol_encoding.h
+~/draco_py/draco/src/draco/core/varint_decoding.h
+~/draco_py/draco/src/draco/core/varint_encoding.h
+~/draco_py/draco/src/draco/core/vector_d.h
+~/draco_py/draco/src/draco/core/bit_coders/adaptive_rans_bit_coding_shared.h
+~/draco_py/draco/src/draco/core/bit_coders/adaptive_rans_bit_decoder.h
+~/draco_py/draco/src/draco/core/bit_coders/adaptive_rans_bit_encoder.h
+~/draco_py/draco/src/draco/core/bit_coders/direct_bit_decoder.h
+~/draco_py/draco/src/draco/core/bit_coders/direct_bit_encoder.h
+~/draco_py/draco/src/draco/core/bit_coders/folded_integer_bit_decoder.h
+~/draco_py/draco/src/draco/core/bit_coders/folded_integer_bit_encoder.h
+~/draco_py/draco/src/draco/core/bit_coders/rans_bit_decoder.h
+~/draco_py/draco/src/draco/core/bit_coders/rans_bit_encoder.h
+~/draco_py/draco/src/draco/core/bit_coders/symbol_bit_decoder.h
+~/draco_py/draco/src/draco/core/bit_coders/symbol_bit_encoder.h
+~/draco_py/draco/src/draco/io/mesh_io.h
+~/draco_py/draco/src/draco/io/obj_decoder.h
+~/draco_py/draco/src/draco/io/obj_encoder.h
+~/draco_py/draco/src/draco/io/parser_utils.h
+~/draco_py/draco/src/draco/io/ply_decoder.h
+~/draco_py/draco/src/draco/io/ply_encoder.h
+~/draco_py/draco/src/draco/io/ply_property_reader.h
+~/draco_py/draco/src/draco/io/ply_property_writer.h
+~/draco_py/draco/src/draco/io/ply_reader.h
+~/draco_py/draco/src/draco/io/point_cloud_io.h
+~/draco_py/draco/src/draco/javascript/emscripten/decoder_webidl_wrapper.h
+~/draco_py/draco/src/draco/javascript/emscripten/encoder_webidl_wrapper.h
+~/draco_py/draco/src/draco/mesh/corner_table.h
+~/draco_py/draco/src/draco/mesh/corner_table_iterators.h
+~/draco_py/draco/src/draco/mesh/corner_table_traversal_processor.h
+~/draco_py/draco/src/draco/mesh/edgebreaker_observer.h
+~/draco_py/draco/src/draco/mesh/edgebreaker_traverser.h
+~/draco_py/draco/src/draco/mesh/mesh.h
+~/draco_py/draco/src/draco/mesh/mesh_are_equivalent.h
+~/draco_py/draco/src/draco/mesh/mesh_attribute_corner_table.h
+~/draco_py/draco/src/draco/mesh/mesh_cleanup.h
+~/draco_py/draco/src/draco/mesh/mesh_misc_functions.h
+~/draco_py/draco/src/draco/mesh/mesh_stripifier.h
+~/draco_py/draco/src/draco/mesh/prediction_degree_traverser.h
+~/draco_py/draco/src/draco/mesh/triangle_soup_mesh_builder.h
+~/draco_py/draco/src/draco/metadata/geometry_metadata.h
+~/draco_py/draco/src/draco/metadata/metadata.h
+~/draco_py/draco/src/draco/metadata/metadata_decoder.h
+~/draco_py/draco/src/draco/metadata/metadata_encoder.h
+~/draco_py/draco/src/draco/point_cloud/point_cloud.h
+~/draco_py/draco/src/draco/point_cloud/point_cloud_builder.h
+~/draco_py/draco/src/draco/unity/draco_unity_plugin.h
+
+// cppast
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/attribute_octahedron_transform.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/attribute_quantization_transform.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/attribute_transform.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/attribute_transform_data.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/attribute_transform_type.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/geometry_attribute.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/geometry_indices.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/attributes/point_attribute.h -I ~/draco_py/draco/src
+vim ~/draco_py/draco/src/draco/attributes/point_attribute.h.pxd
+
+~/cppast/buildexample/documentation_generator ~/draco_py/draco/src/draco/attributes/point_attribute.h -I ~/draco_py/draco/src
+
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/decode.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/encode.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/encode_base.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/expert_encode.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/attributes_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/attributes_decoder_interface.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/attributes_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/kd_tree_attributes_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/kd_tree_attributes_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/kd_tree_attributes_shared.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/linear_sequencer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/mesh_attribute_indices_encoding_data.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/mesh_attribute_indices_encoding_observer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/mesh_traversal_sequencer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/normal_compression_utils.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/points_sequencer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_decoders_controller.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_attribute_encoders_controller.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_integer_attribute_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_integer_attribute_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_normal_attribute_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_normal_attribute_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_quantization_attribute_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/sequential_quantization_attribute_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_constrained_multi_parallel -I ~/draco_py/draco/srcogram_decoder.h
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_constrained_multi_parallelogram_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_constrained_multi_parallelogram_shared.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_data.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_geometric_normal_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_geometric_normal_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_geometric_normal_predictor_area.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_geometric_normal_predictor_base.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_multi_parallelogram_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_multi_parallelogram_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_parallelogram_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_parallelogram_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_parallelogram_shared.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_portable_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_portable_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/mesh_prediction_scheme_tex_coords_portable_predictor.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_decoder_factory.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_decoder_interface.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_decoding_transform.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_delta_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_delta_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_encoder_factory.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_encoder_interface.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_encoding_transform.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_factory.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_interface.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_canonicalized_deco -I ~/draco_py/draco/srcding_transform.h
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_canonicalized_encoding_transform.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_canonicalized_transform_base.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_decoding_transform.h -I ~/draco_py/draco/src
+
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_normal_octahedron_transform_base.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_wrap_decoding_transform.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_wrap_encoding_transform.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/attributes/prediction_schemes/prediction_scheme_wrap_transform_base.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/config/compression_shared.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/config/decoder_options.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/config/draco_options.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/config/encoder_options.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/config/encoding_features.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_decoder_helpers.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_decoder_impl.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_decoder_impl_interface.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_encoder_impl.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_encoder_impl_interface.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_shared.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_predictive_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_predictive_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_valence_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_edgebreaker_traversal_valence_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_encoder_helpers.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_sequential_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/mesh/mesh_sequential_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_kd_tree_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_kd_tree_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_sequential_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/point_cloud_sequential_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/dynamic_integer_points_kd_tree_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/dynamic_integer_points_kd_tree_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/float_points_tree_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/float_points_tree_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/integer_points_kd_tree_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/integer_points_kd_tree_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/point_cloud_compression_method.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/point_cloud_types.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/quantize_points_3.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/compression/point_cloud/algorithms/queuing_policy.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/ans.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_utils.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/cycle_timer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/data_buffer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/decoder_buffer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/divide.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/draco_index_type.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/draco_index_type_vector.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/draco_test_base.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/draco_test_utils.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/draco_types.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/draco_version.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/encoder_buffer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/hash_utils.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/macros.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/math_utils.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/options.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/quantization_utils.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/rans_symbol_coding.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/rans_symbol_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/rans_symbol_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/shannon_entropy.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/status.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/statusor.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/symbol_coding_utils.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/symbol_decoding.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/symbol_encoding.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/varint_decoding.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/varint_encoding.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/vector_d.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/adaptive_rans_bit_coding -I ~/draco_py/draco/src_shared.h
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/adaptive_rans_bit_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/adaptive_rans_bit_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/direct_bit_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/direct_bit_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/folded_integer_bit_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/folded_integer_bit_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/rans_bit_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/rans_bit_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/symbol_bit_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/core/bit_coders/symbol_bit_encoder.h -I ~/draco_py/draco/src
+
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/mesh_io.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/obj_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/obj_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/parser_utils.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_property_reader.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_property_writer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/ply_reader.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/io/point_cloud_io.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/javascript/emscripten/decoder_webidl_wrapper -I ~/draco_py/draco/src.h
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/javascript/emscripten/encoder_webidl_wrapper.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/corner_table.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/corner_table_iterators.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/corner_table_traversal_processor.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/edgebreaker_observer.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/edgebreaker_traverser.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_are_equivalent.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_attribute_corner_table.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_cleanup.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_misc_functions.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/mesh_stripifier.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/prediction_degree_traverser.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/mesh/triangle_soup_mesh_builder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/geometry_metadata.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/metadata.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/metadata_decoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/metadata/metadata_encoder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/point_cloud/point_cloud.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/point_cloud/point_cloud_builder.h -I ~/draco_py/draco/src
+~/cppast/build/autopxd/autopxd/cppast_autopxd ~/draco_py/draco/src/draco/unity/draco_unity_plugin.h -I ~/draco_py/draco/src
+
+
+// vim
+
+// attribute
+rm ~/draco_py/draco/src/draco/attributes/*.pxd
+cat ~/draco_py/draco/src/draco/attributes/*.pxd > ~/draco_py/draco/src/draco/attributes/attributes.pxd
+vim ~/draco_py/draco/src/draco/attributes/attributes.pxd
+
+
+// core
+rm ~/draco_py/draco/src/draco/core/*.pxd
+cat ~/draco_py/draco/src/draco/core/*.pxd > ~/draco_py/draco/src/draco/core/core.pxd
+vim ~/draco_py/draco/src/draco/core/core.pxd
+
+// mesh
+rm ~/draco_py/draco/src/draco/mesh/*.pxd
+cat ~/draco_py/draco/src/draco/mesh/*.pxd > ~/draco_py/draco/src/draco/mesh/mesh.pxd
+vim ~/draco_py/draco/src/draco/mesh/mesh.pxd
+

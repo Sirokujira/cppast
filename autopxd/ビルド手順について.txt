@@ -1,0 +1,73 @@
+ビルド手順
+1. cppast の clone
+git clone https://github.com/foonathan/cppast
+
+2. submodule の追加
+git submodule add https://sirokujira@bitbucket.org/sirokujira/cppast2autopxd.git autopxd
+
+3. cppast の CMakeLists.txt に修正を加える。
+   3-a. add_subdirectory(autopxd/autopxd) の追加
+   3-b. option の設定
+   option(CPPAST_BUILD_TEST "whether or not to build the tests" OFF)
+   option(CPPAST_BUILD_EXAMPLE "whether or not to build the examples" OFF)
+   option(CPPAST_BUILD_TOOL "whether or not to build the tool" ON)
+   option(BUILD_TESTING "build test" OFF) # The ctest variable for building tests
+   ※ tool のみビルド対象に加える。
+   3-c. 解析に使用するコンパイラ(ライブラリ?)の設定
+
+export TOOLSET=clang++-3.9
+export LLVM_VERSION=3.9
+export LLVM_CONFIG_BINARY=/usr/bin/llvm-config-3.9
+※ ×(実行時 -dI 引数の部分でエラー発生）
+
+export TOOLSET=clang++-4.0
+export LLVM_VERSION=4.0
+export LLVM_CONFIG_BINARY=/usr/bin/llvm-config-4.0
+※ 安定版(2018/07/31 確認時点での)
+
+export TOOLSET=clang++-6.0
+export LLVM_VERSION=6.0
+export LLVM_CONFIG_BINARY=/usr/bin/llvm-config-6.0
+※ ビルド自体 NG
+
+※ 使用する clang のバージョンを設定すること。(default[apt install] ×)
+
+# デフォルトの clang の置き換え?
+後ろは優先度(高い値ほど優先される)
+sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-4.0/bin/clang++ 101
+sudo update-alternatives --install /usr/bin/clang clang /usr/lib/llvm-4.0/bin/clang 101
+sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-6.0/bin/clang++ 99
+sudo update-alternatives --install /usr/bin/clang clang /usr/lib/llvm-6.0/bin/clang 99
+
+---
+
+コマンド
+mkdir build && cd build
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-Werror -pedantic -Wall -Wextra -Wconversion -Wsign-conversion -Wno-parentheses -Wno-assume" ../ -DCPPAST_TEST_GCOV="OFF" -DLLVM_CONFIG_BINARY=$LLVM_CONFIG_BINARY
+make -j4
+
+submodule 更新 ～ build
+cd ~/cppast/autopxd
+git checkout .
+git pull
+
+cd ../build
+make -j4
+
+(簡易対応の場合)
+vim ~/cppast/autopxd/autopxd/autopxd.hpp
+vim ~/cppast/autopxd/autopxd/generator/IGenerator.h
+make -j4
+
+---
+
+Cython に関する etc
+https://cython.readthedocs.io/en/latest/src/tutorial/pure.html
+http://cython.readthedocs.io/en/latest/src/reference/compilation.html#compiler-directives
+
+---
+
+外部ライブラリ
+json 読込み(nlohmann/json)
+https://github.com/nlohmann/json/releases
+

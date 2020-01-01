@@ -1,0 +1,16 @@
+1‚Â‚ß JSON for Modern C++ (use 3.1.2)
+https://github.com/nlohmann/json
+https://nlohmann.github.io/json/
+
+http://pickles-ochazuke.hatenablog.com/entry/2017/08/02/172805
+
+#include "json.hpp"
+using json = nlohmann::json;
+
+JSON ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+std::ifstream reading("test.json", std::ios::in);
+
+https://mattn.kaoriya.net/software/lang/c/20170307144241.htm
+
+---
+
