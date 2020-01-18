@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <stack>
 
 #include <cppast/libclang_parser.hpp>        // for libclang_parser, libclang_compile_config, cpp_entity,...
 #include <cppast/visitor.hpp>                // for visit()
@@ -706,7 +707,7 @@ public:
 
             // standard header list
             // start
-            // 標準 C/C++ ヘッダファイルかどうかチェックする。
+            // 標準 C ヘッダファイルかどうかチェックする。
             for(auto itr = c_header_lists.begin(); itr != c_header_lists.end(); ++itr)
             {
                 // '標準C header check'
@@ -718,7 +719,7 @@ public:
 
                     // cimport の対応
                     std::string repace_c_import = "";
-                    // TODO : 取り出したい内容が ファイル名と一致していないケースもあるので注意して実装する。
+                    // TODO : Cython として取り出したい import 内容と ヘッダファイル名が一致していないケースもあるので注意して実装する。
                     if (repace_c_import_header == "stdint.h")
                     {
                         // stdint 読み出し
