@@ -3,18 +3,18 @@
 #include <string>
 #include "IGenerator.h"
 
-class KeywordGenerator : public IGenerator
+class TokenGenerator : public IGenerator
 {
 private:
     std::string str;
 
 public:
-    KeywordGenerator() = default;
-    virtual ~KeywordGenerator() = default;
+    TokenGenerator() = default;
+    virtual ~TokenGenerator() = default;
 
     virtual std::string GetType() const noexcept override
     {
-        return "keyword: ";
+        return "token: ";
     };
     
     virtual std::string GetString() override
