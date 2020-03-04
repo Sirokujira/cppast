@@ -362,17 +362,6 @@ int main(int argc, char* argv[]) try
         // autopxd_file = file->name() + ".pxd";
         std::cout << file->name() << '\n';
 
-        /*
-        std::ofstream fout_pxd;
-        // open target write pxd file
-        fout_pxd.open(autopxd_file, std::ios::out);
-
-        // print_ast(std::cout, *file);
-        autopxd_ast(fout_pxd, *file);
-
-        // close target write pxd file
-        fout_pxd.close();
-        */
         autopxd = new AutoPxd(file->name());
 
         autopxd->autopxd_ast(*file);

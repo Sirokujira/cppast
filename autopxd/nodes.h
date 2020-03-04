@@ -1,412 +1,458 @@
-#pragma once 
-#include <string>
+#pragma once
 
-interface PxdNode
+// #include <assert>
+
+#include <string>
+#include <vector>
+// #include <format> // C++20
+
+// code_generator
+#include "generator/IGenerator.h"
+#include "generator/CommentGenerator.h"
+#include "generator/FloatliteralGenerator.h"
+#include "generator/IdentifierGenerator.h"
+#include "generator/IntliteralGenerator.h"
+#include "generator/KeywordGenerator.h"
+#include "generator/PreprocessorGenerator.h"
+#include "generator/PunctuationGenerator.h"
+#include "generator/ReferenceGenerator.h"
+#include "generator/StrliteralGenerator.h"
+#include "generator/TokenGenerator.h"
+
+// http://pyopyopyo.hatenablog.com/entry/2019/02/08/102456
+template <typename ... Args>
+std::string format(const std::string& fmt, Args ... args )
+{
+    size_t len = std::snprintf( nullptr, 0, fmt.c_str(), args ... );
+    std::vector<char> buf(len + 1);
+    std::snprintf(&buf[0], len + 1, fmt.c_str(), args ... );
+    return std::string(&buf[0], &buf[0] + len);
+}
+
+
+class PxdNode
 {
 public:
-    PxdNode() default;
-    virtual ~PxdNode() default;
-
-private:
-    std::string indent("    ");
+    //PxdNode()=default;
+    //virtual ~PxdNode()=default;
+    //PxdNode(const PxdNode &obj) {}
+    //PxdNode(const PxdNode&) = delete;
 
 public:
-    virtual std::string __str__()
-    {
-        return '\n'.join(this->lines())
-    }
+	// 
+	// virtual void writeline(cppast::cpp_entity_kind kind, std::vector<IGenerator*> generators) = 0;
+	virtual void writeline(std::vector<IGenerator*> generators) = 0;
 
-    virtual std::string __str__()
-    {
-        return std::string("\n"); // + std::string(this->lines());
-    }
+	// 
+	virtual void calc() = 0;
+
+    virtual std::string lines() = 0;
+    // {
+    //     return std::string("");
+    // }
+
+    virtual std::vector<std::string> lines2() = 0;
+    // {
+    //     std::vector<std::string> param;
+    //     return param;
+    // }
+
+    //virtual std::string __str__()
+    //{
+    //    return std::string("\n"); // + std::string(this->lines());
+    //}
 };
 
-
+/*
 class IdentifierType : public PxdNode
 {
-private:
-    std::string name;
-    std::string type_name;
+public:
+    IdentifierType() = default;
+    IdentifierType(const std::string& name, const std::string& type_name)
+    {
+        this->name = name;
+        this->type_name = type_name;
+    }
+    virtual ~IdentifierType() = default;
+
+    std::string lines() override
+    {
+        if(!this->name.empty())
+        {
+            return format("%s %s", this->type_name, this->name);
+        }
+        else
+        {
+            return this->type_name;
+        }
+    }
 
 public:
-    def IdentifierType(name, type_name)
-    {
-        this->name = name or ''
-        this->type_name = type_name
-    }
-
-    std::string lines()
-    {
-        if this->name:
-            return ['{0} {1}'.format(this->type_name, this->name)]
-        else:
-            return [this->type_name]
-    }
+    std::string name;
+    std::string type_name;
 };
 
 class Function : public PxdNode
 {
-private:
-    std::string return_type;
-    std::string name;
-    std::string args;
-
 public:
-    Function(std::string return_type, std::string name, std::string args)
+    Function() = default;
+    Function(const std::string& return_type, const std::string& name, const std::vector<PxdNode>& args)
     {
-        this->return_type = return_type
-        this->name = name
-        this->args = args
+        this->return_type = return_type;
+        this->name = name;
+        this->args = args;
     }
+    virtual ~Function() = default;
 
     std::string argstr()
     {
-        l = []
-        for arg in this->args:
-            lines = arg.lines()
-            assert len(lines) == 1
-            l.append(lines[0])
-        return ', '.join(l)
+        // std::vector<std::string> l; // = new std::vector<std::string>();
+        std::string l;
+        // for(PxdNode arg : this->args)
+        // {
+        //     std::string lines = arg.lines();
+        //     // assert(len(lines) == 1);
+        //     // l.push_back(lines);
+        //     l += lines;
+        // }
+        return ", " + l;
     }
 
-    std::string lines()
+    std::string lines() override
     {
-        return [
-            '{0} {1}({2})'.format(this->return_type, this->name, this->argstr())
-        ]
+        return format("{} {}({})", this->return_type, this->name, this->argstr());
     }
+
+public:
+    std::string return_type;
+    std::string name;
+    std::vector<PxdNode> args;
+
 };
 
 class Ptr : public IdentifierType
 {
-private:
-	auto node;
+public:
+    IdentifierType* node;
 
 public:
-    Ptr(auto node)
+    Ptr() = default;
+    virtual ~Ptr() = default;
+    Ptr(IdentifierType* node)
+    {
+        this->node = node;
+    }
+
+    std::string name()
+    {
+        return this->node->name;
+    }
+
+    std::string type_name()
+    {
+        return this->node->type_name + "*";
+    }
+
+    std::string lines() override
+    {
+        // if(typeid(this->node) == typeid(Function))
+        // {
+        //     auto f = this->node;
+        //     auto args = f->argstr();
+        //     return format("{0} (*{1})({2})", f->return_type, f->name, args);
+        // }
+        // else
+        // {
+            return ((PxdNode*)this)->lines();
+        // }
+    }
+};
+
+class Array : public IdentifierType
+{
+public:
+    IdentifierType* node;
+
+public:
+    Array() = default;
+    virtual ~Array() = default;
+
+    Array(IdentifierType* node)
     {
         this->node = node;
     }
 
     // @property
-    def name():
-        return this->node.name;
-
-    @property
-	auto type_name()
-	{
-        return this->node.type_name + '*';
-	}
-
-    auto lines()
-	{
-        if isinstance(this->node, Function)
-		{
-            f = this->node
-            args = f.argstr()
-            return ['{0} (*{1})({2})'.format(f.return_type, f.name, args)]
-		}
-        else
-		{
-            return super(Ptr, self).lines()
-		}
-	}
-};
-
-/*!	@brief	
-*/
-class Array : public IdentifierType
-{
-private:
-	auto node;
-
-public:
-    Array(auto node)
-	{
-        this->node = node
-	}
+    std::string name()
+    {
+        return this->node->name + "[1]";
+    }
 
     // @property
-    def name(self):
-        return this->node.name + '[1]'
-
-    // @property
-    def type_name(self):
-        return this->node.type_name
+    std::string type_name()
+    {
+        return this->node->type_name;
+    }
 };
 
-/*!	@brief	
-*/
 class Type : public PxdNode
 {
 public:
-	Type(node)
-	{
-        this->node = node
-	}
+    PxdNode* node;
 
-    std::vector<std::string> lines(self)
-	{
-        lines = this->node.lines()
-        lines[0] = 'ctypedef ' + lines[0]
-        return lines
-	}
+public:
+    Type() = default;
+    virtual ~Type() = default;
+
+    Type(PxdNode* node)
+    {
+        this->node = node;
+    }
+
+    // std::vector<std::string> lines()
+    std::vector<std::string> lines2() override
+    {
+        std::vector<std::string> lines = this->node->lines2();
+        lines[0] = "ctypedef " + lines[0];
+        return lines;
+    }
 };
 
-/*!	@brief	
-*/
 class Block : public PxdNode
 {
-private:
+public:
     std::string name;
-    std::string fields;
+    std::vector<PxdNode> fields;
     std::string kind;
 
 public:
-    Block(std::string name, std::string fields, std::string kind)
+    const std::string indent = "    ";
+
+public:
+    Block() = default;
+    virtual ~Block() = default;
+
+    Block(const std::string& name, const std::vector<PxdNode>& fields, const std::string& kind)
     {
         this->name = name;
         this->fields = fields;
         this->kind = kind;
     }
 
-    std::vector<double> lines()
+    // std::vector<std::string> lines()
+    std::vector<std::string> lines2() override
     {
-        rv = ['cdef {0} {1}:'.format(this->kind, this->name)]
-        for field in this->fields:
-            for line in field.lines():
-                rv.append(this->indent + line)
-        return rv
+        std::vector<std::string> rv;
+        rv.push_back(format("cdef {0} {1}:",this->kind, this->name));
+        // for(PxdNode field : this->fields)
+        // {
+        //     for(std::string strline : field.lines2())
+        //     {
+        //         rv.push_back(((PxdNode*)this)->indent + strline);
+        //     }
+        // }
+        return rv;
     }
-}
-
-/*!	@brief	
+};
 */
-class Enum : pubic PxdNode
+
+class EnumNode : public PxdNode
 {
-private:
-    std::string name;
-    std::string items;
 public:
-    Enum(std::string name, std::string items)
+    std::string name;
+    // std::vector<PxdNode> items;
+    std::vector<std::string> items;
+    std::string statement="cdef";
+
+public:
+    const std::string indent = "    ";
+
+public:
+    EnumNode() = default;
+    virtual ~EnumNode() = default;
+
+    EnumNode(const std::string& name, const std::vector<std::string>& items)
     {
         this->name = name;
         this->items = items;
     }
+	
+	// C/C++ の分解結果を追加
+	void writeline(std::vector<IGenerator*> generators) override
+	{
+		// 
+	}
 
-    std::vector<std::string> lines()
+	void calc() override
+	{
+		// 
+	}
+
+    std::string lines() override
     {
-        rv = []
-        if this->name:
-            rv.append('cdef enum {0}:'.format(this->name))
-        else:
-            rv.append('cdef enum:')
-        for item in this->items:
-            rv.append(this->indent + item)
-        return rv
+        return std::string("");
+    }
+
+    std::vector<std::string> lines2() override
+    {
+        std::vector<std::string> rv = {};
+        for (auto& item : this->items)
+        {
+            // rv.push_back(((PxdNode*)this)->indent + item);
+            //rv.push_back(this->indent + item);
+        	rv.push_back(item);
+        }
+        return rv;
     }
 };
 
-interface ClassDefine
+class ClassPxdNode : public PxdNode
 {
-};
-
-/*!
-*/
-class AutoPxd : public PxdNode
-{
-private:
-    // hファイル(root ファイル)
-    // namespace(階層になるケースがあるため複数?)
-    // class定義(階層になるケースがあるため複数?)
-    // template付 class定義
-    // template 定義
-    // struct 定義
-    // → 上記パラメータを同一で扱えるように基底クラスを用意する?
+public:
+    std::string name;
+    // std::vector<PxdNode> items;
+    std::vector<std::string> items;
+    std::string statement="cdef";
 
 public:
-    AutoPxd(auto hdrname)
+    const std::string indent = "    ";
+
+public:
+    ClassPxdNode() = default;
+    virtual ~ClassPxdNode() = default;
+
+    ClassPxdNode(const std::string& name, const std::vector<std::string>& items)
     {
-        this->hdrname = hdrname
-        this->decl_stack = [[]]
-        this->visit_stack = []
+        this->name = name;
+        this->items = items;
+    }
+	
+	// C/C++ の分解結果を追加
+	void writeline(std::vector<IGenerator*> generators) override
+	{
+		// 
+	}
+
+	void calc() override
+	{
+		// 
+	}
+
+    std::string lines() override
+    {
+        return std::string("");
     }
 
-    auto visit(auto node)
+    std::vector<std::string> lines2() override
     {
-        this->visit_stack.append(node)
-        rv = super(AutoPxd, self).visit(node)
-        n = this->visit_stack.pop()
-        assert n == node
-        return rv
+        std::vector<std::string> rv = {};
+        for (auto& item : this->items)
+        {
+            // rv.push_back(((PxdNode*)this)->indent + item);
+            //rv.push_back(this->indent + item);
+        	rv.push_back(item);
+        }
+        return rv;
+    }
+};
+
+class TemplateClassPxdNode : public PxdNode
+{
+public:
+    std::string name;
+    // std::vector<PxdNode> items;
+    std::vector<std::string> items;
+    std::string statement="cdef";
+
+public:
+    const std::string indent = "    ";
+
+public:
+    TemplateClassPxdNode() = default;
+    virtual ~TemplateClassPxdNode() = default;
+
+    TemplateClassPxdNode(const std::string& name, const std::vector<std::string>& items)
+    {
+        this->name = name;
+        this->items = items;
+    }
+	
+	// C/C++ の分解結果を追加
+	void writeline(std::vector<IGenerator*> generators) override
+	{
+		// 
+	}
+
+	void calc() override
+	{
+		// 
+	}
+
+    std::string lines() override
+    {
+        return std::string("");
     }
 
-    void visit_IdentifierType(auto node)
+    std::vector<std::string> lines2() override
     {
-        this->append(' '.join(node.names))
+        std::vector<std::string> rv = {};
+        for (auto& item : this->items)
+        {
+            // rv.push_back(((PxdNode*)this)->indent + item);
+            //rv.push_back(this->indent + item);
+        	rv.push_back(item);
+        }
+        return rv;
+    }
+};
+
+class TemplateFunctionPxdNode : public PxdNode
+{
+public:
+    std::string name;
+    // std::vector<PxdNode> items;
+    std::vector<std::string> items;
+    std::string statement="cdef";
+
+public:
+    const std::string indent = "    ";
+
+public:
+    TemplateFunctionPxdNode() = default;
+    virtual ~TemplateFunctionPxdNode() = default;
+
+    TemplateFunctionPxdNode(const std::string& name, const std::vector<std::string>& items)
+    {
+        this->name = name;
+        this->items = items;
+    }
+	
+	// C/C++ の分解結果を追加
+	void writeline(std::vector<IGenerator*> generators) override
+	{
+		// 
+	}
+
+	void calc() override
+	{
+		// 
+	}
+
+    std::string lines() override
+    {
+        return std::string("");
     }
 
-    void visit_Block(auto node, auto kind)
+    std::vector<std::string> lines2() override
     {
-        name = node.name
-        if not name:
-            name = this->path_name(kind[0])
-        if not node.decls:
-            if this->child_of(c_ast.TypeDecl, -2):
-                # not a definition, must be a reference
-                this->append(name)
-            return
-        fields = this->collect(node)
-        # add the struct/union definition to the top level
-        this->decl_stack[0].append(Block(name, fields, kind))
-        if this->child_of(c_ast.TypeDecl, -2):
-            # inline struct/union, add a reference to whatever name it was
-            # defined on the top level
-            this->append(name)
-    }
-
-    void visit_Enum(auto node)
-    {
-        items = []
-        if node.values:
-            for item in node.values.enumerators:
-                items.append(item.name)
-        name = node.name
-        type_decl = this->child_of(c_ast.TypeDecl, -2)
-        if not name and type_decl:
-            name = this->path_name('e')
-        # add the enum definition to the top level
-        if len(items):
-            this->decl_stack[0].append(Enum(name, items))
-        if type_decl:
-            this->append(name)
-    }
-
-    auto visit_Struct(auto node)
-    {
-        return this->visit_Block(node, 'struct')
-    }
-
-    auto visit_Union(auto node)
-    {
-        return this->visit_Block(node, 'union')
-    }
-
-    void visit_TypeDecl(auto node)
-    {
-        decls = this->collect(node)
-        if not decls:
-            return
-        assert len(decls) == 1
-        if isinstance(decls[0], six.string_types):
-            this->append(IdentifierType(node.declname, decls[0]))
-        else:
-            this->append(decls[0])
-    }
-
-    void visit_Decl(auto node)
-    {
-        decls = this->collect(node)
-        if not decls:
-            return
-        assert len(decls) == 1
-        if isinstance(decls[0], six.string_types):
-            this->append(IdentifierType(node.name, decls[0]))
-        else:
-            this->append(decls[0])
-    }
-
-    void visit_FuncDecl(auto node)
-    {
-        decls = this->collect(node)
-        return_type = decls[-1].type_name
-        fname = decls[-1].name
-        args = decls[:-1]
-        if (len(args) == 1 and isinstance(args[0], IdentifierType) and
-            args[0].type_name == 'void'):
-            args = []
-        if (this->child_of(c_ast.PtrDecl, -2) and not
-            this->child_of(c_ast.Typedef, -3)):
-            # declaring a variable or parameter
-            name = this->path_name('ft'.format(fname))
-            this->decl_stack[0].append(Type(Ptr(Function(return_type, name, args))))
-            this->append(name)
-        else:
-            this->append(Function(return_type, fname, args))
-    }
-
-    void visit_PtrDecl(auto node)
-    {
-        decls = this->collect(node)
-        assert len(decls) == 1
-        if isinstance(decls[0], six.string_types):
-            this->append(decls[0])
-        else:
-            this->append(Ptr(decls[0]))
-    }
-
-    void visit_ArrayDecl(auto node)
-    {
-        decls = this->collect(node)
-        assert len(decls) == 1
-        this->append(Array(decls[0]))
-    }
-
-    void visit_Typedef(auto node)
-    {
-        decls = this->collect(node)
-        if len(decls) != 1:
-            return
-        names = str(decls[0]).split()
-        if names[0] != names[1]:
-            this->decl_stack[0].append(Type(decls[0]))
-    }
-
-    auto collect(auto node)
-    {
-        decls = []
-        this->decl_stack.append(decls)
-        name = this->generic_visit(node)
-        assert this->decl_stack.pop() == decls
-        return decls
-    }
-
-    auto path_name(auto tag)
-    {
-        names = []
-        for node in this->visit_stack[:-2]:
-            if hasattr(node, 'declname') and node.declname:
-                names.append(node.declname)
-            elif hasattr(node, 'name') and node.name:
-                names.append(node.name)
-        return '_{0}_{1}'.format('_'.join(names), tag)
-    }
-
-    auto child_of(auto type, auto index=None)
-    {
-        if index is None:
-            for node in reversed(this->visit_stack):
-                if isinstance(node, type):
-                    return True
-            return False
-        else:
-            return isinstance(this->visit_stack[index], type)
-    }
-
-    append(node)
-    {
-        this->decl_stack[-1].append(node)
-    }
-
-    auto lines()
-    {
-        rv = ['cdef extern from "{0}":'.format(this->hdrname), '']
-        for decl in this->decl_stack[0]:
-            for line in decl.lines():
-                rv.append(this->indent + line)
-            rv.append('')
-        return rv
+        std::vector<std::string> rv = {};
+        for (auto& item : this->items)
+        {
+            // rv.push_back(((PxdNode*)this)->indent + item);
+            //rv.push_back(this->indent + item);
+        	rv.push_back(item);
+        }
+        return rv;
     }
 };
 
