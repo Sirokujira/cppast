@@ -1,0 +1,255 @@
+# ------------------------------------------------------------------------------------
+# Helper to use CPPAST from outside project
+#
+# CPPAST_FOUND
+# CPPAST_INCLUDE_DIRS is filled with CPPAST and available 3rdparty headers
+# CPPAST_LIBRARY_DIRS is filled with CPPAST components libraries install directory and 3rdparty libraries paths
+# CPPAST_LIBRARIES
+# CPPAST_DEFINITIONS
+#------------------------------------------------------------------------------------
+
+# Set default policy behavior similar to minimum requirement version
+cmake_policy(VERSION 3.5)
+
+# explicitly set policies we already support in newer cmake versions
+if(POLICY CMP0074)
+  # TODO: update *_ROOT variables to be CPPAST_*_ROOT or equivalent.
+  # CMP0074 directly affects how Find* modules work and *_ROOT variables.  Since
+  # this is a config file that will be consumed by parent projects with (likely)
+  # NEW behavior, we need to push a policy stack.
+  cmake_policy(SET CMP0074 NEW)
+endif()
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/Modules")
+
+### ---[ some useful macros
+macro(cppast_report_not_found _reason)
+  unset(CPPAST_FOUND)
+  unset(CPPAST_LIBRARIES)
+  unset(CPPAST_INCLUDE_DIRS)
+  unset(CPPAST_LIBRARY_DIRS)
+  unset(CPPAST_DEFINITIONS)
+  if(CPPAST_FIND_REQUIRED)
+    message(FATAL_ERROR ${_reason})
+  elseif(NOT CPPAST_FIND_QUIETLY)
+    message(WARNING ${_reason})
+  endif()
+  return()
+endmacro()
+
+### ---[ 3rd party libraries
+macro(find_tiny_process_library)
+  find_package(tiny_process_library)
+endmacro()
+
+macro(find_type_safe)
+  find_package(type_safe)
+endmacro()
+
+macro(find_debug_assert)
+  find_package(debug_assert)
+endmacro()
+
+macro(find_external_library _component _lib _is_optional)
+  if("${_lib}" STREQUAL "tiny-process-library")
+    find_tiny_process_library()
+  elseif("${_lib}" STREQUAL "type_safe")
+    find_type_safe()
+  elseif("${_lib}" STREQUAL "debug_assert")
+    find_debug_assert()
+  endif()
+
+  string(TOUPPER "${_lib}" LIB)
+  #string(REGEX REPLACE "[.-]" "_" LIB ${LIB})
+  message(STATUS "_lib")
+  message(STATUS "${_lib}")
+  message(STATUS "LIB")
+  message(STATUS ${LIB})
+  if(${LIB}_FOUND)
+    list(APPEND CPPAST_INCLUDE_DIRS ${${LIB}_INCLUDE_DIRS})
+    if(${LIB}_USE_FILE)
+      include(${${LIB}_USE_FILE})
+    else()
+      list(APPEND CPPAST_LIBRARY_DIRS "${${LIB}_LIBRARY_DIRS}")
+    endif()
+    if(${LIB}_LIBRARIES)
+      list(APPEND CPPAST_LIBRARIES "${${LIB}_LIBRARIES}")
+    endif()
+  endif()
+endmacro()
+
+macro(cppast_check_external_dependency _component)
+endmacro()
+
+#flatten dependencies recursivity is great \o/
+macro(compute_dependencies TO_FIND_COMPONENTS)
+  foreach(component ${${TO_FIND_COMPONENTS}})
+    set(cppast_component cppast_${component})
+    if(${cppast_component}_int_dep AND (NOT CPPAST_FIND_ALL))
+      foreach(dependency ${${cppast_component}_int_dep})
+        list(FIND ${TO_FIND_COMPONENTS} ${component} pos)
+        list(FIND ${TO_FIND_COMPONENTS} ${dependency} found)
+        if(found EQUAL -1)
+          set(cppast_dependency cppast_${dependency})
+          if(${cppast_dependency}_int_dep)
+            list(INSERT ${TO_FIND_COMPONENTS} ${pos} ${dependency})
+            if(cppast_${dependency}_ext_dep)
+              list(APPEND cppast_${component}_ext_dep ${cppast_${dependency}_ext_dep})
+            endif()
+            if(cppast_${dependency}_opt_dep)
+              list(APPEND cppast_${component}_opt_dep ${cppast_${dependency}_opt_dep})
+            endif()
+            compute_dependencies(${TO_FIND_COMPONENTS})
+          else()
+            list(INSERT ${TO_FIND_COMPONENTS} 0 ${dependency})
+          endif()
+        endif()
+      endforeach()
+    endif()
+  endforeach()
+endmacro()
+
+### ---[ Find CPPAST
+
+if(CPPAST_FIND_QUIETLY)
+  set(QUIET_ QUIET)
+else()
+  set(QUIET_)
+endif()
+
+file(TO_CMAKE_PATH "${CPPAST_DIR}" CPPAST_DIR)
+if(WIN32 AND NOT MINGW)
+# CPPASTConfig.cmake is installed to CPPAST_ROOT/cmake
+  message(STATUS "win32")
+  message(STATUS ${CPPAST_ROOT})
+  message(STATUS ${cppast_DIR})
+  message(STATUS ${CPPAST_DIR})
+  set(CPPAST_ROOT "${cppast_DIR}/../../..")
+else()
+# CPPASTConfig.cmake is installed to CPPAST_ROOT/share/cppast-x.y
+  message(STATUS "else")
+  get_filename_component(CPPAST_ROOT "${CMAKE_CURRENT_LIST_DIR}/../.." ABSOLUTE)
+endif()
+
+message(STATUS "EXISTS")
+message(STATUS ${CPPAST_ROOT})
+# check whether CPPASTConfig.cmake is found into a CPPAST installation or in a build tree
+if(EXISTS "${CPPAST_ROOT}/include/cppast_config.h")
+  # Found a CPPAST installation
+  message(STATUS "Found a CPPAST installation")
+  set(CPPAST_CONF_INCLUDE_DIR "${CPPAST_ROOT}/include")
+  set(CPPAST_LIBRARY_DIRS "${CPPAST_ROOT}/lib")
+else()
+  message(STATUS "CPPAST can not be found on this machine")
+endif()
+
+set(CPPAST_INCLUDE_DIRS "${CPPAST_CONF_INCLUDE_DIR}")
+
+#set a suffix for debug libraries
+set(CPPAST_DEBUG_SUFFIX "@CMAKE_DEBUG_POSTFIX@")
+set(CPPAST_RELEASE_SUFFIX "@CMAKE_RELEASE_POSTFIX@")
+
+set(cppast_all_components @CPPASTCONFIG_AVAILABLE_COMPONENTS@)
+list(LENGTH cppast_all_components CPPAST_NB_COMPONENTS)
+message(STATUS "cppast_all_components")
+message(STATUS ${cppast_all_components})
+#set(cppast_all_components "cppast;debug_assert;type_safe")
+set(cppast_all_components "debug_assert;type_safe")
+message(STATUS ${cppast_all_components})
+
+#set(cppast_header_only_components include)
+
+include(FindPackageHandleStandardArgs)
+
+#check if user provided a list of components
+#if no components at all or full list is given set CPPAST_FIND_ALL
+message(STATUS ${CPPAST_FIND_COMPONENTS})
+if(CPPAST_FIND_COMPONENTS)
+  list(LENGTH CPPAST_FIND_COMPONENTS CPPAST_FIND_COMPONENTS_LENGTH)
+  if(CPPAST_FIND_COMPONENTS_LENGTH EQUAL CPPAST_NB_COMPONENTS)
+    set(CPPAST_TO_FIND_COMPONENTS ${cppast_all_components})
+    set(CPPAST_FIND_ALL 1)
+  else()
+    set(CPPAST_TO_FIND_COMPONENTS ${CPPAST_FIND_COMPONENTS})
+  endif()
+else()
+  set(CPPAST_TO_FIND_COMPONENTS ${cppast_all_components})
+  set(CPPAST_FIND_ALL 1)
+endif()
+
+#compute_dependencies(CPPAST_TO_FIND_COMPONENTS)
+
+###
+# We do not need to find components that have been found already, e.g. during previous invocation
+# of find_package(CPPAST). Filter them out.
+foreach(component ${CPPAST_TO_FIND_COMPONENTS})
+  string(TOUPPER "${component}" COMPONENT)
+  if(NOT CPPAST_${COMPONENT}_FOUND)
+    list(APPEND _CPPAST_TO_FIND_COMPONENTS ${component})
+  endif()
+endforeach()
+set(CPPAST_TO_FIND_COMPONENTS ${_CPPAST_TO_FIND_COMPONENTS})
+unset(_CPPAST_TO_FIND_COMPONENTS)
+
+foreach(component ${CPPAST_TO_FIND_COMPONENTS})
+  #set(cppast_component cppast_${component})
+  string(TOUPPER "${component}" COMPONENT)
+
+  message(STATUS "looking for CPPAST_${COMPONENT}")
+  #message(STATUS ${CPPAST_INCLUDE_DIRS})
+  message(STATUS ${component})
+
+  #find_path(CPPAST_${COMPONENT}_INCLUDE_DIR
+  #  NAMES ${component}.hpp
+  #  #HINTS ${CPPAST_INCLUDE_DIRS}
+  #  PATHS ${CPPAST_INCLUDE_DIRS}/${component}
+  #  #PATH_SUFFIXES ${component}
+  #  DOC "path to ${component} headers")
+  #  #NO_DEFAULT_PATH)
+  set(CPPAST_${COMPONENT}_INCLUDE_DIR "${CPPAST_INCLUDE_DIRS}/${component}")
+  mark_as_advanced(CPPAST_${COMPONENT}_INCLUDE_DIR)
+
+  if(CPPAST_${COMPONENT}_INCLUDE_DIR)
+    list(APPEND CPPAST_${COMPONENT}_INCLUDE_DIRS "${CPPAST_${COMPONENT}_INCLUDE_DIR}")
+  else()
+    message(WARN "No include directory found for ${component}.")
+  endif()
+
+  # Skip find_library for header only modules
+  #list(FIND cppast_header_only_components ${component} _is_header_only)
+  if(CPPAST_${COMPONENT}_FOUND)
+    if(NOT "${CPPAST_${COMPONENT}_INCLUDE_DIRS}" STREQUAL "")
+      set(_filtered "")
+      foreach(_inc ${CPPAST_${COMPONENT}_INCLUDE_DIRS})
+        if(EXISTS ${_inc})
+          list(APPEND _filtered "${_inc}")
+        endif()
+      endforeach()
+      list(REMOVE_DUPLICATES _filtered)
+      set(CPPAST_${COMPONENT}_INCLUDE_DIRS ${_filtered})
+      list(APPEND CPPAST_INCLUDE_DIRS ${_filtered})
+    endif()
+    mark_as_advanced(CPPAST_${COMPONENT}_INCLUDE_DIRS)
+
+    set(CPPAST_${COMPONENT}_LIBRARIES ${cppast_component})
+  endif()
+endforeach()
+###
+
+if(NOT "${CPPAST_INCLUDE_DIRS}" STREQUAL "")
+  list(REMOVE_DUPLICATES CPPAST_INCLUDE_DIRS)
+endif()
+
+if(NOT "${CPPAST_LIBRARY_DIRS}" STREQUAL "")
+  list(REMOVE_DUPLICATES CPPAST_LIBRARY_DIRS)
+endif()
+
+if(NOT "${CPPAST_DEFINITIONS}" STREQUAL "")
+  list(REMOVE_DUPLICATES CPPAST_DEFINITIONS)
+endif()
+
+# Add 3rd party libraries, as user code might include our .HPP implementations
+list(APPEND CPPAST_LIBRARIES "cppast;_cppast_tiny_process" ${TYPE_SAFE_LIBRARIES} ${DEBUG_ASSERT_LIBRARIES})
+
+find_package_handle_standard_args(CPPAST DEFAULT_MSG CPPAST_LIBRARIES CPPAST_INCLUDE_DIRS)
+mark_as_advanced(CPPAST_LIBRARIES CPPAST_INCLUDE_DIRS CPPAST_LIBRARY_DIRS)

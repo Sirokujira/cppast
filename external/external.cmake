@@ -11,6 +11,7 @@ if(NOT type_safe_FOUND)
     execute_process(COMMAND git submodule update --init -- external/type_safe
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe EXCLUDE_FROM_ALL)
+    #add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe)
 endif()
 
 #
@@ -246,3 +247,8 @@ target_include_directories(_cppast_libclang INTERFACE ${LIBCLANG_INCLUDE_DIR})
 target_compile_definitions(_cppast_libclang INTERFACE
                            CPPAST_CLANG_BINARY="${CLANG_BINARY}"
                            CPPAST_CLANG_VERSION_STRING="${LLVM_VERSION}")
+if(type_safe_FOUND)
+    #target_link_directories(_cppast_libclang ${type_safe_LIBRARIES})
+    target_link_libraries(_cppast_libclang INTERFACE ${type_safe_LIBRARY})
+    target_include_directories(_cppast_libclang INTERFACE ${type_safe_INCLUDE_DIR})
+endif()
