@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2018 Jonathan Müller <jonathanmueller.dev@gmail.com>
+# Copyright (C) 2017-2018 Jonathan Muller <jonathanmueller.dev@gmail.com>
 # This file is subject to the license terms in the LICENSE file
 # found in the top-level directory of this distribution.
 
@@ -103,7 +103,10 @@ set(libclang_source
 
 add_library(cppast ${detail_header} ${header} ${source} ${libclang_source})
 target_compile_features(cppast PUBLIC cxx_std_11)
-target_include_directories(cppast PRIVATE ../include SYSTEM INTERFACE ../include)
+target_include_directories(cppast PRIVATE
+                                ../include
+                                SYSTEM INTERFACE
+                                $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
 target_link_libraries(cppast PUBLIC type_safe _cppast_tiny_process _cppast_libclang)
 target_compile_definitions(cppast PUBLIC
                                 CPPAST_VERSION_MINOR="${cppast_VERSION_MINOR}"
@@ -117,4 +120,4 @@ target_compile_options(cppast PRIVATE
                            $<$<CXX_COMPILER_ID:GNU>: -Wno-noexcept-type>
                            # MSVC warnings
                            $<$<CXX_COMPILER_ID:MSVC>:
-                           /W3>)
+                           /WX /W4>)

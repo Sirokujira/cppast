@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Jonathan Müller <jonathanmueller.dev@gmail.com>
+# Copyright (C) 2017 Jonathan Muller <jonathanmueller.dev@gmail.com>
 # This file is subject to the license terms in the LICENSE file
 # found in the top-level directory of this distribution.
 
@@ -10,8 +10,8 @@ if(NOT type_safe_FOUND)
     message(STATUS "Installing type_safe via submodule")
     execute_process(COMMAND git submodule update --init -- external/type_safe
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe EXCLUDE_FROM_ALL)
-    #add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe)
+    #add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe EXCLUDE_FROM_ALL)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe)
 endif()
 
 #
@@ -35,7 +35,13 @@ else()
                     ${tiny_process_dir}/process.cpp
                     ${tiny_process_dir}/process_unix.cpp)
 endif()
-target_include_directories(_cppast_tiny_process PUBLIC ${tiny_process_dir})
+#target_include_directories(_cppast_tiny_process
+#                               PUBLIC 
+#                               $<BUILD_INTERFACE:${tiny_process_dir}>)
+target_include_directories(_cppast_tiny_process
+                               INTERFACE $<BUILD_INTERFACE:${tiny_process_dir}>)
+target_include_directories(_cppast_tiny_process 
+                               SYSTEM INTERFACE $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
 target_link_libraries(_cppast_tiny_process PUBLIC Threads::Threads)
 set_target_properties(_cppast_tiny_process PROPERTIES CXX_STANDARD 11)
 
@@ -243,12 +249,19 @@ endif()
 
 add_library(_cppast_libclang INTERFACE)
 target_link_libraries(_cppast_libclang INTERFACE ${LIBCLANG_LIBRARY})
-target_include_directories(_cppast_libclang INTERFACE ${LIBCLANG_INCLUDE_DIR})
+target_include_directories(_cppast_libclang INTERFACE $<BUILD_INTERFACE:${LIBCLANG_INCLUDE_DIR}>)
+target_include_directories(_cppast_libclang SYSTEM INTERFACE $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
 target_compile_definitions(_cppast_libclang INTERFACE
                            CPPAST_CLANG_BINARY="${CLANG_BINARY}"
                            CPPAST_CLANG_VERSION_STRING="${LLVM_VERSION}")
 if(type_safe_FOUND)
     #target_link_directories(_cppast_libclang ${type_safe_LIBRARIES})
+    #target_link_libraries(_cppast_libclang INTERFACE type_safe debug_assert)
     target_link_libraries(_cppast_libclang INTERFACE ${type_safe_LIBRARY})
-    target_include_directories(_cppast_libclang INTERFACE ${type_safe_INCLUDE_DIR})
+    target_include_directories(_cppast_libclang 
+                                   INTERFACE 
+                                   $<BUILD_INTERFACE:${type_safe_INCLUDE_DIR}>)
+    #target_include_directories(_cppast_libclang 
+    #                               SYSTEM INTERFACE 
+    #                               $<INSTALL_INTERFACE:${type_safe_INCLUDE_DIR}>)
 endif()
