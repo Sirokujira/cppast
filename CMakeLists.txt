@@ -13,20 +13,20 @@ option(CPPAST_BUILD_TOOL "whether or not to build the tool" OFF)
 
 
 if(${CPPAST_BUILD_TEST} AND (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
-    set(build_test ON)
+    set(build_test OFF)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # for the self integration test
 else()
     set(build_test OFF)
 endif()
 
 if(${CPPAST_BUILD_EXAMPLE} OR (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
-    set(build_example ON)
+    set(build_example OFF)
 else()
     set(build_example OFF)
 endif()
 
 if(${CPPAST_BUILD_TOOL} OR (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))
-    set(build_tool ON)
+    set(build_tool OFF)
 else()
     set(build_tool OFF)
 endif()
@@ -58,36 +58,35 @@ endif()
   set(cppast_config_h_in "${CMAKE_CURRENT_SOURCE_DIR}/cppast_config.h.in")
   set(cppast_config_h "${CMAKE_CURRENT_BINARY_DIR}/include/cppast/cppast_config.h")
   configure_file("${cppast_config_h_in}" "${cppast_config_h}")
-
   ### ---[ Add the includes subdirectories
   install(FILES "${cppast_config_h}" DESTINATION include)
   install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include" DESTINATION .)
 
-  ### ---[ Add the libraries subdirectories
-  #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/src/Debug/cppast.lib DESTINATION lib CONFIGURATIONS Debug)
-  #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/src/Release/cppast.lib DESTINATION lib CONFIGURATIONS Release)
-  #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Debug/_cppast_tiny_process.lib DESTINATION lib CONFIGURATIONS Debug)
-  #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Release/_cppast_tiny_process.lib DESTINATION lib CONFIGURATIONS Release)
-
   ### ---[ Configure CPPASTConfig.cmake
   include(GNUInstallDirs)
   include(CMakePackageConfigHelpers)
-  set(CPPAST_CMAKE_DIR "lib/cmake/cppast" CACHE STRING
+  set(CPPAST_CMAKE_DIR "lib/cppast/cmake" CACHE STRING
       "Installation directory for cmake files, relative to ${CMAKE_INSTALL_PREFIX}.")
   set(version_config "${PROJECT_BINARY_DIR}/cppast-config-version.cmake")
   set(project_config "${PROJECT_BINARY_DIR}/cppast-config.cmake")
   set(targets_export_name cppast-targets)
   #set(targets_export_name2 _cppast_tiny_process-targets)
 
+  # not use install(EXPORT)
+  # use ***-config.cmake.in
+  # set(INCLUDE_INSTALL_DIR include/ ... CACHE )
+  # set(LIB_INSTALL_DIR lib/ ... CACHE )
+  # set(SYSCONFIG_INSTALL_DIR etc/foo/ ... CACHE )
+  configure_package_config_file(
+      ${PROJECT_SOURCE_DIR}/cppast-config.cmake.in
+      ${project_config}
+      INSTALL_DESTINATION ${CPPAST_CMAKE_DIR})
+      # PATH_VARS INCLUDE_INSTALL_DIR SYSCONFIG_INSTALL_DIR)
   # Generate the version, config and target files into the build directory.
   write_basic_package_version_file(
       ${version_config}
       VERSION ${VERSION}
       COMPATIBILITY AnyNewerVersion)
-  configure_package_config_file(
-      ${PROJECT_SOURCE_DIR}/cppast-config.cmake.in
-      ${project_config}
-      INSTALL_DESTINATION ${CPPAST_CMAKE_DIR})
 
   #???(cppast::[libraryname])
   export(TARGETS cppast NAMESPACE cppast::
@@ -116,11 +115,22 @@ endif()
       endif()
   endif()
 
+  # Install the CMake configuration files:
   # Install version, config and target files.
-  install(FILES ${project_config} ${version_config} DESTINATION ${CPPAST_CMAKE_DIR})
+  install(FILES 
+    ${project_config}
+    ${version_config}
+    DESTINATION ${CPPAST_CMAKE_DIR})
   #install(FILES ${project_config} ${version_config} DESTINATION ${CPPAST_CMAKE_DIR}/Debug CONFIGURATIONS Debug)
   #install(FILES ${project_config} ${version_config} DESTINATION ${CPPAST_CMAKE_DIR}/Release CONFIGURATIONS Release)
-  export(TARGETS cppast NAMESPACE cppast:: FILE ${PROJECT_BINARY_DIR}/${targets_export_name}.cmake)
-  #install(EXPORT ${targets_export_name2} DESTINATION ${CPPAST_CMAKE_DIR})
-  #export(TARGETS tiny-process-library NAMESPACE tiny-process-library:: FILE ${PROJECT_BINARY_DIR}/${targets_export_name2}.cmake)
+
+  # Install the export set for use with the install-tree
+  message(STATUS ${PROJECT_NAME})
+  install(EXPORT ${PROJECT_NAME}TargetGroup
+    DESTINATION ${CPPAST_CMAKE_DIR}
+    FILE ${targets_export_name}.cmake)
+
+  # export(TARGETS cppast NAMESPACE cppast:: FILE ${PROJECT_BINARY_DIR}/${targets_export_name}.cmake)
+  # install(EXPORT ${targets_export_name2} DESTINATION ${CPPAST_CMAKE_DIR})
+  # export(TARGETS tiny-process-library NAMESPACE tiny-process-library:: FILE ${PROJECT_BINARY_DIR}/${targets_export_name2}.cmake)
 #endif()
