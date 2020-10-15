@@ -15,7 +15,15 @@
 
 @PACKAGE_INIT@
 
-set_and_check(CPPAST_CMAKE_DIR "@PACKAGE_CPPAST_CMAKE_DIR@")
+include(FindPackageHandleStandardArgs)
+
+set_and_check(CPPAST_INCLUDE_DIRS   "@CMAKE_INSTALL_FULL_INCLUDEDIR@" )
+set_and_check(CPPAST_LIBRARY_DIRS   "@CMAKE_INSTALL_PREFIX@/lib")
+#set_and_check(CPPAST_ICONS_DIR      "@CMAKE_INSTALL_PREFIX@/share/icons" )
+#set_and_check(CPPAST_CONFIG_DIR     "${installedPrefix}/@CONFIG_INSTALL_DIR@" )
+set_and_check(CPPAST_CMAKE_DIR "@CMAKE_INSTALL_PREFIX@/lib/cmake/@PROJECT_NAME@")
+
+set(CPPAST_LIBRARIES      "cppast;_cppast_tiny_process")
 
 # Set default policy behavior similar to minimum requirement version
 # cmake_policy(VERSION 3.8)
@@ -47,6 +55,10 @@ endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CPPAST_CMAKE_DIR}/modules)
 
+# Provide all our library targets to users.
+# include("${CMAKE_MODULE_PATH}/Finddebug_assert.cmake")
+# include("${CMAKE_MODULE_PATH}/Findtype_safe.cmake")
+
 message(STATUS ${CPPAST_ROOT})
 # check whether CPPASTConfig.cmake is found into a CPPAST installation or in a build tree
 if(EXISTS "${CPPAST_ROOT}/include/cppast_config.h")
@@ -65,23 +77,21 @@ endif()
 # Load the dependencies for the libraries of @PROJECT_NAME@
 # (contains definitions for IMPORTED targets). This is only
 # imported if we are not built as a subproject (in this case targets are already there)
-IF(NOT TARGET Event AND NOT @PROJECT_NAME@_BINARY_DIR)
-  INCLUDE("@PACKAGE_CPPAST_INSTALL_CMAKE@/@PROJECT_NAME@-target.cmake")
-ENDIF()
+if(NOT TARGET Event AND NOT @PROJECT_NAME@_BINARY_DIR)
+  include("${CPPAST_CMAKE_DIR}/@PROJECT_NAME@-targets.cmake")
+endif()
 
 #set a suffix for debug libraries
 set(CPPAST_DEBUG_SUFFIX "@CMAKE_DEBUG_POSTFIX@")
 set(CPPAST_RELEASE_SUFFIX "@CMAKE_RELEASE_POSTFIX@")
 
-
-
-include(FindPackageHandleStandardArgs)
-
-set(CPPAST_INCLUDE_DIR   "@CMAKE_INSTALL_FULL_INCLUDEDIR@" )
-#set(CPPAST_ICONS_DIR   "@CMAKE_INSTALL_PREFIX@/share/icons" )
-#set(CPPAST_CONFIG_DIR  "${installedPrefix}/@CONFIG_INSTALL_DIR@" )
+message(STATUS ${CPPAST_LIBRARY_DIRS})
+message(STATUS ${CPPAST_LIBRARIES})
+message(STATUS ${CPPAST_DEBUG_ASSERT_INCLUDE_DIRS})
+message(STATUS ${CPPAST_TYPE_SAFE_INCLUDE_DIRS})
 
 # Package root dir:
-SET_AND_CHECK(GUI_ROOT_DIR_EXP "@PACKAGE_CMAKE_INSTALL_PREFIX@")
+# set_and_check(GUI_ROOT_DIR_EXP "@PACKAGE_CMAKE_INSTALL_PREFIX@")
 
+include(${CMAKE_CURRENT_LIST_DIR}/@targets_export_name@.cmake)
 check_required_components(cppast)
