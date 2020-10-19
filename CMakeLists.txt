@@ -5,6 +5,14 @@
 cmake_minimum_required(VERSION 3.8)
 project(cppast VERSION 0.0)
 
+# Allow custom cmake overrides
+#set(CPPAST_CMAKE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake/module)
+#set(CPPAST_CMAKE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+#set(CMAKE_MODULE_PATH ${CPPAST_CMAKE_DIR} ${CMAKE_MODULE_PATH})
+
+# Use ctest for dashboard submissions
+# include(CTest)
+
 # options
 option(CPPAST_BUILD_TEST "whether or not to build the tests" OFF)
 option(CPPAST_BUILD_EXAMPLE "whether or not to build the examples" OFF)
@@ -68,10 +76,26 @@ endif()
   include(CMakePackageConfigHelpers)
   set(CPPAST_CMAKE_DIR "lib/cmake/cppast" CACHE STRING
       "Installation directory for cmake files, relative to ${CMAKE_INSTALL_PREFIX}.")
+
+  # Set up our directory structure for output libraries and binaries
+  # (Note: these are the build locations, not the install locations)
+  if(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CPPAST_BINARY_DIR}/bin")
+  endif()
+  if(NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)
+    if(UNIX)
+      set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CPPAST_BINARY_DIR}/lib")
+    else()
+      set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CPPAST_BINARY_DIR}/bin")
+    endif()
+  endif()
+  if(NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CPPAST_BINARY_DIR}/lib")
+  endif()
+
   set(version_config "${PROJECT_BINARY_DIR}/cppast-config-version.cmake")
   set(project_config "${PROJECT_BINARY_DIR}/cppast-config.cmake")
   set(targets_export_name cppast-targets)
-  #set(targets_export_name2 _cppast_tiny_process-targets)
 
   # not use install(EXPORT)
   # use ***-config.cmake.in
@@ -91,8 +115,6 @@ endif()
   #???(cppast::[libraryname])
   export(TARGETS cppast NAMESPACE cppast::
          FILE ${PROJECT_BINARY_DIR}/${targets_export_name}.cmake)
-  #export(TARGETS _cppast_tiny_process NAMESPACE _cppast_tiny_process::
-  #       FILE ${PROJECT_BINARY_DIR}/${targets_export_name2}.cmake)
 
   install(
       FILES ${project_config} ${version_config}
@@ -100,23 +122,29 @@ endif()
 
   # Install the export set for use with the install-tree
   #message(STATUS ${PROJECT_NAME})
-  #install(EXPORT ${PROJECT_NAME}TargetGroup
-  #  DESTINATION ${CPPAST_CMAKE_DIR}
-  #  FILE ${targets_export_name}.cmake)
   install(EXPORT ${PROJECT_NAME}
       DESTINATION ${CPPAST_CMAKE_DIR}
       FILE ${targets_export_name}.cmake)
   install(EXPORT ${targets_export_name} DESTINATION ${CPPAST_CMAKE_DIR}
-      NAMESPACE cppopts::)
-  #install(EXPORT ${targets_export_name2} DESTINATION ${CPPAST_CMAKE_DIR}
-  #    NAMESPACE _cppast_tiny_process::)
-
+      NAMESPACE cppast::)
   # Install the header file and export the target
   # install(TARGETS cppast EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  # library(not generate cppast-targets)
+  #install(TARGETS cppast _cppast_tiny_process _cppast_libclang EXPORT ${targets_export_name}
+  #                                  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/Debug
+  #                                  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/Debug
+  #                                  CONFIGURATIONS Debug)
+  #install(TARGETS cppast _cppast_tiny_process _cppast_libclang EXPORT ${targets_export_name}
+  #                                  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/Release
+  #                                  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/Release
+  #                                  CONFIGURATIONS Release)
+  # internal use modules(set EXCLUDE_FROM_ALL)
   install(TARGETS cppast _cppast_tiny_process _cppast_libclang EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-  # 
-  # install(TARGETS cppast _cppast_tiny_process EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR}/Debug CONFIGURATIONS Debug)
-  # install(TARGETS cppast _cppast_tiny_process EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR}/Release CONFIGURATIONS Release)
+  # external use type_safe(not set EXCLUDE_FROM_ALL?)
+  # install(TARGETS cppast _cppast_tiny_process _cppast_libclang type_safe debug_assert EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  # NG
+  # install(TARGETS cppast ${CPPAST_LIBRARIES} EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
   find_package(type_safe QUIET)
   if(type_safe_FOUND)
   else()

@@ -2,8 +2,8 @@
 # Helper to use CPPAST from outside project
 #
 # CPPAST_FOUND
-# CPPAST_INCLUDE_DIRS is filled with CPPAST and available 3rdparty headers
-# CPPAST_LIBRARY_DIRS is filled with CPPAST components libraries install directory and 3rdparty libraries paths
+# CPPAST_INCLUDE_DIRS
+# CPPAST_LIBRARY_DIRS
 # CPPAST_LIBRARIES
 # CPPAST_DEFINITIONS
 #------------------------------------------------------------------------------------
@@ -11,19 +11,49 @@
 #    In your CMakeLists.txt, add these lines:
 #
 #    find_package(cppast REQUIRED)
-#    target_link_libraries(MY_TARGET_NAME PUBLIC cppast)
+#    target_link_libraries(MY_TARGET_NAME PUBLIC cppast::_cppast_tiny_process cppast::_cppast_libclang)
 
 @PACKAGE_INIT@
 
-include(FindPackageHandleStandardArgs)
+# The C and C++ flags added to the cmake-configured flags.
+set(CPPAST_REQUIRED_C_FLAGS "@CPPAST_REQUIRED_C_FLAGS@")
+set(CPPAST_REQUIRED_CXX_FLAGS "@CPPAST_REQUIRED_CXX_FLAGS@")
 
-set_and_check(CPPAST_INCLUDE_DIRS   "@CMAKE_INSTALL_FULL_INCLUDEDIR@" )
-set_and_check(CPPAST_LIBRARY_DIRS   "@CMAKE_INSTALL_PREFIX@/lib")
-#set_and_check(CPPAST_ICONS_DIR      "@CMAKE_INSTALL_PREFIX@/share/icons" )
-#set_and_check(CPPAST_CONFIG_DIR     "${installedPrefix}/@CONFIG_INSTALL_DIR@" )
+# The version number
+set(CPPAST_MAJOR_VERSION "@CPPAST_MAJOR_VERSION@")
+set(CPPAST_MINOR_VERSION "@CPPAST_MINOR_VERSION@")
+set(CPPAST_PATCH_VERSION "@CPPAST_PATCH_VERSION@")
+
+# Legacy (for backwards compatibility)
+set(CPPAST_BUILD_VERSION "${CPPAST_PATCH_VERSION}")
+
+# Configured settings
+#set(CPPAST_BUILD_SHARED_LIBS "@BUILD_SHARED_LIBS@")
+#set(CPPAST_USE_ITK_GDCM "@USE_ITK_GDCM@")
+
 set_and_check(CPPAST_CMAKE_DIR "@CMAKE_INSTALL_PREFIX@/lib/cmake/@PROJECT_NAME@")
 
-set(CPPAST_LIBRARIES      "cppast;_cppast_tiny_process")
+# support cmake default package
+include(FindPackageHandleStandardArgs)
+
+# use _cppast_tiny_process
+find_package(Threads REQUIRED QUIET)
+
+# Dependencies
+#set(CPPAST_TYPESAFE_DIR "@TYPESAFE_DIR@")
+#if(NOT TYPESAFE_FOUND)
+#  find_package(VTK PATHS "${CPPAST_TYPESAFE_DIR}")
+#else()
+#  get_filename_component(tmp1 "${CPPAST_TYPESAFE_DIR}" REALPATH)
+#  get_filename_component(tmp2 "${TYPESAFE_DIR}" REALPATH)
+#  if(NOT "${tmp1}" STREQUAL "${tmp2}")
+#    message(WARNING
+#      "Mismatch for VTK between vtk-dicom and current project: "
+#      "CPPAST_DIR=${CPPAST_DIR} "
+#      "TYPESAFE_CPPAST_DIR=${CPPAST_TYPESAFE_DIR} "
+#      "TYPESAFE_DIR=${TYPESAFE_DIR}")
+#  endif()
+#endif()
 
 # Set default policy behavior similar to minimum requirement version
 # cmake_policy(VERSION 3.8)
@@ -40,11 +70,6 @@ endif()
 # https://cmake.org/cmake/help/latest/module/CMakePackageConfigHelpers.html
 
 ### ---[ Find CPPAST
-#if(CPPAST_FIND_QUIETLY)
-#  set(QUIET_ QUIET)
-#else()
-#  set(QUIET_)
-#endif()
 if (cppast_FIND_QUIETLY) 
   set(QUIET_OR_REQUIRED_OPTION "QUIET")
 elseif (cppast_FIND_REQUIRED) 
@@ -53,11 +78,12 @@ else ()
   set(QUIET_OR_REQUIRED_OPTION "")
 endif()
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CPPAST_CMAKE_DIR}/modules)
+# set original package cmake setting
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH} @CPPAST_CMAKE_DIR@")
 
 # Provide all our library targets to users.
-# include("${CMAKE_MODULE_PATH}/Finddebug_assert.cmake")
-# include("${CMAKE_MODULE_PATH}/Findtype_safe.cmake")
+#include("${CPPAST_CMAKE_DIR}/module/Finddebug_assert.cmake")
+#include("${CPPAST_CMAKE_DIR}/module/Findtype_safe.cmake")
 
 message(STATUS ${CPPAST_ROOT})
 # check whether CPPASTConfig.cmake is found into a CPPAST installation or in a build tree
@@ -66,17 +92,20 @@ if(EXISTS "${CPPAST_ROOT}/include/cppast_config.h")
   message(STATUS "Found a CPPAST installation")
   set(CPPAST_CONF_INCLUDE_DIR "${CPPAST_ROOT}/include")
   set(CPPAST_LIBRARY_DIRS "${CPPAST_ROOT}/lib")
-  set(CPPAST_LIBRARIES "cppast;_cppast_tiny_process")
+  set(CPPAST_LIBRARIES "cppast;_cppast_tiny_process;_cppast_libclang")
   # set(CPPAST_DEFINITIONS
 else()
   message(STATUS "CPPAST can not be found on this machine")
 endif()
 
-#set(CPPAST_INCLUDE_DIRS "${CPPAST_CONF_INCLUDE_DIR}")
+# Get the current directory
+message(STATUS ${CMAKE_CURRENT_LIST_FILE})
+get_filename_component(CPPAST_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 
-# Load the dependencies for the libraries of @PROJECT_NAME@
-# (contains definitions for IMPORTED targets). This is only
-# imported if we are not built as a subproject (in this case targets are already there)
+# The location of the "use" file.
+#set(CPPAST_USE_FILE "${CPPAST_CMAKE_DIR}/UseCPPAST.cmake")
+
+# Our library dependencies (contains definitions for IMPORTED targets)
 if(NOT TARGET Event AND NOT @PROJECT_NAME@_BINARY_DIR)
   include("${CPPAST_CMAKE_DIR}/@PROJECT_NAME@-targets.cmake")
 endif()
@@ -85,13 +114,20 @@ endif()
 set(CPPAST_DEBUG_SUFFIX "@CMAKE_DEBUG_POSTFIX@")
 set(CPPAST_RELEASE_SUFFIX "@CMAKE_RELEASE_POSTFIX@")
 
-message(STATUS ${CPPAST_LIBRARY_DIRS})
-message(STATUS ${CPPAST_LIBRARIES})
-message(STATUS ${CPPAST_DEBUG_ASSERT_INCLUDE_DIRS})
-message(STATUS ${CPPAST_TYPE_SAFE_INCLUDE_DIRS})
+# Compute paths
+set_and_check(CPPAST_INCLUDE_DIRS   "@CMAKE_INSTALL_FULL_INCLUDEDIR@" )
+set_and_check(CPPAST_LIBRARY_DIRS   "@CMAKE_INSTALL_PREFIX@/lib")
+#set_and_check(CPPAST_ICONS_DIR      "@CMAKE_INSTALL_PREFIX@/share/icons" )
+#set_and_check(CPPAST_CONFIG_DIR     "${installedPrefix}/@CONFIG_INSTALL_DIR@" )
 
-# Package root dir:
-# set_and_check(GUI_ROOT_DIR_EXP "@PACKAGE_CMAKE_INSTALL_PREFIX@")
+# These are IMPORTED targets created by @PROJECT_NAME@-targets.cmake
+# set(CPPAST_LIBRARIES      "cppast;_cppast_tiny_process;_cppast_libclang")
+set(CPPAST_LIBRARIES      @CPPAST_LIBRARIES@)
+
+#message(STATUS ${CPPAST_LIBRARY_DIRS})
+#message(STATUS ${CPPAST_LIBRARIES})
+#message(STATUS ${CPPAST_DEBUG_ASSERT_INCLUDE_DIRS})
+#message(STATUS ${CPPAST_TYPE_SAFE_INCLUDE_DIRS})
 
 include(${CMAKE_CURRENT_LIST_DIR}/@targets_export_name@.cmake)
 check_required_components(cppast)
