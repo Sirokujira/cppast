@@ -39,22 +39,6 @@ include(FindPackageHandleStandardArgs)
 # use _cppast_tiny_process
 find_package(Threads REQUIRED QUIET)
 
-# Dependencies
-#set(CPPAST_TYPESAFE_DIR "@TYPESAFE_DIR@")
-#if(NOT TYPESAFE_FOUND)
-#  find_package(VTK PATHS "${CPPAST_TYPESAFE_DIR}")
-#else()
-#  get_filename_component(tmp1 "${CPPAST_TYPESAFE_DIR}" REALPATH)
-#  get_filename_component(tmp2 "${TYPESAFE_DIR}" REALPATH)
-#  if(NOT "${tmp1}" STREQUAL "${tmp2}")
-#    message(WARNING
-#      "Mismatch for VTK between vtk-dicom and current project: "
-#      "CPPAST_DIR=${CPPAST_DIR} "
-#      "TYPESAFE_CPPAST_DIR=${CPPAST_TYPESAFE_DIR} "
-#      "TYPESAFE_DIR=${TYPESAFE_DIR}")
-#  endif()
-#endif()
-
 # Set default policy behavior similar to minimum requirement version
 # cmake_policy(VERSION 3.8)
 
@@ -82,8 +66,8 @@ endif()
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH} @CPPAST_CMAKE_DIR@")
 
 # Provide all our library targets to users.
-#include("${CPPAST_CMAKE_DIR}/module/Finddebug_assert.cmake")
-#include("${CPPAST_CMAKE_DIR}/module/Findtype_safe.cmake")
+# include("${CPPAST_CMAKE_DIR}/module/Finddebug_assert.cmake")
+# include("${CPPAST_CMAKE_DIR}/module/Findtype_safe.cmake")
 
 message(STATUS ${CPPAST_ROOT})
 # check whether CPPASTConfig.cmake is found into a CPPAST installation or in a build tree

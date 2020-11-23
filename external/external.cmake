@@ -10,8 +10,14 @@ if(NOT type_safe_FOUND)
     message(STATUS "Installing type_safe via submodule")
     execute_process(COMMAND git submodule update --init -- external/type_safe
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-    #add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe EXCLUDE_FROM_ALL)
+    # external
+    # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe EXCLUDE_FROM_ALL)
+    # internal
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe)
+
+    message(STATUS "type_safe(external)")
+    # install(TARGETS type_safe EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    # install(TARGETS type_safe EXPORT ${targets_export_name})
 endif()
 
 #
@@ -44,6 +50,11 @@ target_include_directories(_cppast_tiny_process
                                SYSTEM INTERFACE $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
 target_link_libraries(_cppast_tiny_process PUBLIC Threads::Threads)
 set_target_properties(_cppast_tiny_process PROPERTIES CXX_STANDARD 11)
+
+message(STATUS "_cppast_tiny_process(external)")
+#install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name})
+
 
 #
 # install cxxopts, if needed
@@ -265,3 +276,7 @@ if(type_safe_FOUND)
     #                               SYSTEM INTERFACE 
     #                               $<INSTALL_INTERFACE:${type_safe_INCLUDE_DIR}>)
 endif()
+
+message(STATUS "_cppast_libclang(external)")
+#install(TARGETS _cppast_libclang EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS _cppast_libclang EXPORT ${targets_export_name})

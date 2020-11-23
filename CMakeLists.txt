@@ -39,6 +39,11 @@ else()
     set(build_tool OFF)
 endif()
 
+# 
+set(targets_export_name cppast-targets)
+set(CPPAST_CMAKE_DIR "lib/cmake/cppast" CACHE STRING
+    "Installation directory for cmake files, relative to ${CMAKE_INSTALL_PREFIX}.")
+
 include(external/external.cmake)
 
 if(build_test AND CPPAST_TEST_GCOV AND (CMAKE_CXX_COMPILER_ID STREQUAL "GNU"))
@@ -74,8 +79,6 @@ endif()
   ### ---[ Configure cppast-config.cmake
   include(GNUInstallDirs)
   include(CMakePackageConfigHelpers)
-  set(CPPAST_CMAKE_DIR "lib/cmake/cppast" CACHE STRING
-      "Installation directory for cmake files, relative to ${CMAKE_INSTALL_PREFIX}.")
 
   # Set up our directory structure for output libraries and binaries
   # (Note: these are the build locations, not the install locations)
@@ -95,7 +98,6 @@ endif()
 
   set(version_config "${PROJECT_BINARY_DIR}/cppast-config-version.cmake")
   set(project_config "${PROJECT_BINARY_DIR}/cppast-config.cmake")
-  set(targets_export_name cppast-targets)
 
   # not use install(EXPORT)
   # use ***-config.cmake.in
@@ -121,39 +123,29 @@ endif()
       DESTINATION ${CPPAST_CMAKE_DIR})
 
   # Install the export set for use with the install-tree
-  #message(STATUS ${PROJECT_NAME})
-  install(EXPORT ${PROJECT_NAME}
-      DESTINATION ${CPPAST_CMAKE_DIR}
-      FILE ${targets_export_name}.cmake)
-  install(EXPORT ${targets_export_name} DESTINATION ${CPPAST_CMAKE_DIR}
-      NAMESPACE cppast::)
+  install(EXPORT ${targets_export_name} 
+          DESTINATION ${CPPAST_CMAKE_DIR}
+          FILE ${targets_export_name}.cmake
+          NAMESPACE cppast::)
+  #install(EXPORT ${targets_export_name} 
+  #        DESTINATION ${CPPAST_CMAKE_DIR}
+  #        NAMESPACE cppast::)
+
   # Install the header file and export the target
   # install(TARGETS cppast EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
   # library(not generate cppast-targets)
-  #install(TARGETS cppast _cppast_tiny_process _cppast_libclang EXPORT ${targets_export_name}
+  # install(TARGETS cppast _cppast_tiny_process _cppast_libclang EXPORT ${targets_export_name}
   #                                  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/Debug
   #                                  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/Debug
   #                                  CONFIGURATIONS Debug)
-  #install(TARGETS cppast _cppast_tiny_process _cppast_libclang EXPORT ${targets_export_name}
+  # install(TARGETS cppast _cppast_tiny_process _cppast_libclang EXPORT ${targets_export_name}
   #                                  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/Release
   #                                  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/Release
   #                                  CONFIGURATIONS Release)
   # internal use modules(set EXCLUDE_FROM_ALL)
-  install(TARGETS cppast _cppast_tiny_process _cppast_libclang EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-  # external use type_safe(not set EXCLUDE_FROM_ALL?)
-  # install(TARGETS cppast _cppast_tiny_process _cppast_libclang type_safe debug_assert EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-  # NG
-  # install(TARGETS cppast ${CPPAST_LIBRARIES} EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-  find_package(type_safe QUIET)
-  if(type_safe_FOUND)
-  else()
-      # use local
-      # debug_assert/type_safe cppast/external module use
-      find_package(debug_assert QUIET)
-      if(debug_assert_FOUND)
-      else()
-          install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe/external/debug_assert/debug_assert.hpp" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-      endif()
-  endif()
+  # If they are both build by the same CMakeLists.txt you can simply call
+  # https://stackoverflow.com/questions/5378528/install-export-problem-for-shared-lib-with-dependencies
+  # install(TARGETS cppast _cppast_tiny_process _cppast_libclang EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+  # src/CMakeLists.txt
+  # install(TARGETS cppast EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 #endif()

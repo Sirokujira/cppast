@@ -101,13 +101,18 @@ set(libclang_source
         libclang/type_parser.cpp
         libclang/variable_parser.cpp)
 
+#set(CPPAST_LIBRARIES "type_safe _cppast_tiny_process _cppast_libclang")
+#set(CPPAST_LIBRARIES "type_safe;_cppast_tiny_process;_cppast_libclang")
+set(CPPAST_LIBRARIES "_cppast_tiny_process;_cppast_libclang;type_safe")
+#set(CPPAST_LIBRARIES "_cppast_tiny_process;_cppast_libclang")
+
 add_library(cppast ${detail_header} ${header} ${source} ${libclang_source})
 target_compile_features(cppast PUBLIC cxx_std_11)
 target_include_directories(cppast PRIVATE
                                 ../include
                                 SYSTEM INTERFACE
                                 $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
-target_link_libraries(cppast PUBLIC type_safe _cppast_tiny_process _cppast_libclang)
+target_link_libraries(cppast PUBLIC ${CPPAST_LIBRARIES})
 target_compile_definitions(cppast PUBLIC
                                 CPPAST_VERSION_MINOR="${cppast_VERSION_MINOR}"
                                 CPPAST_VERSION_MAJOR="${cppast_VERSION_MAJOR}"
@@ -121,3 +126,6 @@ target_compile_options(cppast PRIVATE
                            # MSVC warnings
                            $<$<CXX_COMPILER_ID:MSVC>:
                            /WX /W4>)
+
+#install(TARGETS cppast EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS cppast EXPORT ${targets_export_name})
