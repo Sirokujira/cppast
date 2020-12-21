@@ -17,7 +17,9 @@ project(cppast VERSION 0.0)
 option(CPPAST_BUILD_TEST "whether or not to build the tests" OFF)
 option(CPPAST_BUILD_EXAMPLE "whether or not to build the examples" OFF)
 option(CPPAST_BUILD_TOOL "whether or not to build the tool" OFF)
-#option(CPPAST_ENABLE_INSTALL "Generate the install target" OFF)
+# add install target
+option(CPPAST_ENABLE_INSTALL_TYPESAFE "Generate the install target" OFF)
+option(CPPAST_ENABLE_INSTALL_TINYPROCESSLIBRARY "Generate the install target" OFF)
 
 
 if(${CPPAST_BUILD_TEST} AND (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR))

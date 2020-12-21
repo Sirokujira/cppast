@@ -129,7 +129,7 @@ target_compile_options(cppast PRIVATE
 
 #if (WIN32)
     install(TARGETS cppast EXPORT ${targets_export_name}
-            RUNTIME DESTINATION bin
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
             ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
             LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
     # install(TARGETS cppast EXPORT ${targets_export_name})
