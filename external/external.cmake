@@ -5,19 +5,23 @@
 #
 # install type safe
 #
-find_package(type_safe QUIET)
+# find_package(type_safe QUIET)
 if(NOT type_safe_FOUND)
     message(STATUS "Installing type_safe via submodule")
     execute_process(COMMAND git submodule update --init -- external/type_safe
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
     # external
-    # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe EXCLUDE_FROM_ALL)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe EXCLUDE_FROM_ALL)
     # internal
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe)
+    # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe)
 
-    message(STATUS "type_safe(external)")
-    # install(TARGETS type_safe EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    # message(STATUS "type_safe(external)")
     # install(TARGETS type_safe EXPORT ${targets_export_name})
+    # install(TARGETS type_safe EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    # install(TARGETS type_safe EXPORT ${targets_export_name}
+    #         RUNTIME DESTINATION bin
+    #         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    #         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
 
 #
@@ -52,9 +56,15 @@ target_link_libraries(_cppast_tiny_process PUBLIC Threads::Threads)
 set_target_properties(_cppast_tiny_process PROPERTIES CXX_STANDARD 11)
 
 message(STATUS "_cppast_tiny_process(external)")
-#install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name})
-
+#if (WIN32)
+    install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name}
+            RUNTIME DESTINATION bin
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+#else(WIN32)
+#    install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name})
+#    # install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name} DESTINAATION ${CMAKE_INSTALL_LIBDIR})
+#endif(WIN32)
 
 #
 # install cxxopts, if needed
@@ -265,18 +275,26 @@ target_include_directories(_cppast_libclang SYSTEM INTERFACE $<INSTALL_INTERFACE
 target_compile_definitions(_cppast_libclang INTERFACE
                            CPPAST_CLANG_BINARY="${CLANG_BINARY}"
                            CPPAST_CLANG_VERSION_STRING="${LLVM_VERSION}")
-if(type_safe_FOUND)
-    #target_link_directories(_cppast_libclang ${type_safe_LIBRARIES})
-    #target_link_libraries(_cppast_libclang INTERFACE type_safe debug_assert)
-    target_link_libraries(_cppast_libclang INTERFACE ${type_safe_LIBRARY})
-    target_include_directories(_cppast_libclang 
-                                   INTERFACE 
-                                   $<BUILD_INTERFACE:${type_safe_INCLUDE_DIR}>)
-    #target_include_directories(_cppast_libclang 
-    #                               SYSTEM INTERFACE 
-    #                               $<INSTALL_INTERFACE:${type_safe_INCLUDE_DIR}>)
-endif()
+# if(type_safe_FOUND)
+#    #target_link_directories(_cppast_libclang ${type_safe_LIBRARIES})
+#    #target_link_libraries(_cppast_libclang INTERFACE type_safe debug_assert)
+#    target_link_libraries(_cppast_libclang INTERFACE ${type_safe_LIBRARY})
+#    target_include_directories(_cppast_libclang 
+#                                   INTERFACE 
+#                                   $<BUILD_INTERFACE:${type_safe_INCLUDE_DIR}>)
+#    #target_include_directories(_cppast_libclang 
+#    #                               SYSTEM INTERFACE 
+#    #                               $<INSTALL_INTERFACE:${type_safe_INCLUDE_DIR}>)
+# endif()
+
 
 message(STATUS "_cppast_libclang(external)")
-#install(TARGETS _cppast_libclang EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-install(TARGETS _cppast_libclang EXPORT ${targets_export_name})
+# if (UNIX)
+#    install(TARGETS _cppast_libclang EXPORT ${targets_export_name})
+#    # install(TARGETS _cppast_libclang EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+# else (UNIX)
+    install(TARGETS _cppast_libclang EXPORT ${targets_export_name}
+            RUNTIME DESTINATION bin
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+# endif(UNIX)

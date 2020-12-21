@@ -127,5 +127,14 @@ target_compile_options(cppast PRIVATE
                            $<$<CXX_COMPILER_ID:MSVC>:
                            /WX /W4>)
 
-#install(TARGETS cppast EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-install(TARGETS cppast EXPORT ${targets_export_name})
+#if (WIN32)
+    install(TARGETS cppast EXPORT ${targets_export_name}
+            RUNTIME DESTINATION bin
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    # install(TARGETS cppast EXPORT ${targets_export_name})
+    # install(TARGETS cppast EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
+#else ()
+#    install(TARGETS cppast EXPORT ${targets_export_name})
+#    # install(TARGETS cppast EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSSTALL_LIBDIR})
+#endif()

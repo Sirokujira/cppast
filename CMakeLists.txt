@@ -115,8 +115,8 @@ endif()
       INSTALL_DESTINATION ${CPPAST_CMAKE_DIR})
       # PATH_VARS INCLUDE_INSTALL_DIR SYSCONFIG_INSTALL_DIR)
   #???(cppast::[libraryname])
-  export(TARGETS cppast NAMESPACE cppast::
-         FILE ${PROJECT_BINARY_DIR}/${targets_export_name}.cmake)
+  # export(TARGETS cppast NAMESPACE cppast::
+  #        FILE ${PROJECT_BINARY_DIR}/${targets_export_name}.cmake)
 
   install(
       FILES ${project_config} ${version_config}
@@ -127,9 +127,9 @@ endif()
           DESTINATION ${CPPAST_CMAKE_DIR}
           FILE ${targets_export_name}.cmake
           NAMESPACE cppast::)
-  #install(EXPORT ${targets_export_name} 
-  #        DESTINATION ${CPPAST_CMAKE_DIR}
-  #        NAMESPACE cppast::)
+  # install(EXPORT ${targets_export_name}
+  #         DESTINATION ${CPPAST_CMAKE_DIR}
+  #         NAMESPACE cppast::)
 
   # Install the header file and export the target
   # install(TARGETS cppast EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
