@@ -54,6 +54,9 @@ if(build_test AND CPPAST_TEST_GCOV AND (CMAKE_CXX_COMPILER_ID STREQUAL "GNU"))
     APPEND_COVERAGE_COMPILER_FLAGS()
 endif()
 
+# set cmake install default parameters
+include(GNUInstallDirs)
+
 add_subdirectory(src)
 
 if(${build_test})
@@ -79,7 +82,6 @@ endif()
   install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include" DESTINATION .)
 
   ### ---[ Configure cppast-config.cmake
-  include(GNUInstallDirs)
   include(CMakePackageConfigHelpers)
 
   # Set up our directory structure for output libraries and binaries
