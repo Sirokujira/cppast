@@ -18,12 +18,12 @@ if(NOT type_safe_FOUND)
     else()
         add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe EXCLUDE_FROM_ALL)
     endif()
+    # always call
+    install(TARGETS type_safe EXPORT ${targets_export_name}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 endif()
-# always call
-install(TARGETS type_safe EXPORT ${targets_export_name}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 #
 # install the tiny-process-library
