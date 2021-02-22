@@ -2,14 +2,18 @@
 # This file is subject to the license terms in the LICENSE file
 # found in the top-level directory of this distribution.
 
+include(FetchContent)
+
 #
 # install type safe
 #
 find_package(type_safe QUIET)
 if(NOT type_safe_FOUND)
-    message(STATUS "Installing type_safe via submodule")
-    execute_process(COMMAND git submodule update --init -- external/type_safe
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    message(STATUS "Fetching type_safe")
+    FetchContent_Declare(type_safe GIT_REPOSITORY https://github.com/foonathan/tt
+ype_safe GIT_TAG origin/main)
+    FetchContent_MakeAvailable(type_safe)
+    
     # internal
     if (CPPAST_ENABLE_INSTALL_TYPESAFE)
         add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/type_safe)
@@ -28,40 +32,39 @@ endif()
 #
 # install the tiny-process-library
 #
-message(STATUS "Installing tiny-process-library via submodule")
-execute_process(COMMAND git submodule update --init -- external/tiny-process-library
-                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 find_package(Threads REQUIRED QUIET)
 
 # create a target here instead of using the one provided
-set(tiny_process_dir ${CMAKE_CURRENT_SOURCE_DIR}/external/tiny-process-library)
-if (CPPAST_ENABLE_INSTALL_TINYPROCESSLIBRARY)
-    if(WIN32)
-        add_library(_cppast_tiny_process
-                        ${tiny_process_dir}/process.hpp
-                        ${tiny_process_dir}/process.cpp
-                        ${tiny_process_dir}/process_win.cpp)
-    else()
-        add_library(_cppast_tiny_process
-                        ${tiny_process_dir}/process.hpp
-                        ${tiny_process_dir}/process.cpp
-                        ${tiny_process_dir}/process_unix.cpp)
-    endif()
-    
-    message(STATUS "_cppast_tiny_process(internal)")
-else()
-    if(WIN32)
-        add_library(_cppast_tiny_process EXCLUDE_FROM_ALL
-                        ${tiny_process_dir}/process.hpp
-                        ${tiny_process_dir}/process.cpp
-                        ${tiny_process_dir}/process_win.cpp)
-    else()
-        add_library(_cppast_tiny_process EXCLUDE_FROM_ALL
-                        ${tiny_process_dir}/process.hpp
-                        ${tiny_process_dir}/process.cpp
-                        ${tiny_process_dir}/process_unix.cpp)
-    endif()
-endif()
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/tpl)
+add_library(_cppast_tiny_process INTERFACE)
+# set(tiny_process_dir ${CMAKE_CURRENT_SOURCE_DIR}/external/tiny-process-library)
+# if (CPPAST_ENABLE_INSTALL_TINYPROCESSLIBRARY)
+#    if(WIN32)
+#        add_library(_cppast_tiny_process
+#                        ${tiny_process_dir}/process.hpp
+#                        ${tiny_process_dir}/process.cpp
+#                        ${tiny_process_dir}/process_win.cpp)
+#    else()
+#        add_library(_cppast_tiny_process
+#                        ${tiny_process_dir}/process.hpp
+#                        ${tiny_process_dir}/process.cpp
+#                        ${tiny_process_dir}/process_unix.cpp)
+#    endif()
+#    
+#    message(STATUS "_cppast_tiny_process(internal)")
+#else()
+#    if(WIN32)
+#        add_library(_cppast_tiny_process EXCLUDE_FROM_ALL
+#                        ${tiny_process_dir}/process.hpp
+#                        ${tiny_process_dir}/process.cpp
+#                        ${tiny_process_dir}/process_win.cpp)
+#    else()
+#        add_library(_cppast_tiny_process EXCLUDE_FROM_ALL
+#                        ${tiny_process_dir}/process.hpp
+#                        ${tiny_process_dir}/process.cpp
+#                        ${tiny_process_dir}/process_unix.cpp)
+#    endif()
+#endif()
 # always call
 install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name}
         RUNTIME DESTINATION bin
@@ -69,23 +72,24 @@ install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name}
         LIBRARY DESTINATION lib)
 # install(TARGETS _cppast_tiny_process EXPORT ${targets_export_name})
 
+#target_include_directories(_cppast_tiny_process INTERFACE ${tiny_process_dir})
 target_include_directories(_cppast_tiny_process
-                               INTERFACE $<BUILD_INTERFACE:${tiny_process_dir}>)
+                           INTERFACE $<BUILD_INTERFACE:${tiny_process_dir}>)
 target_include_directories(_cppast_tiny_process 
-                               SYSTEM INTERFACE $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
-target_link_libraries(_cppast_tiny_process PUBLIC Threads::Threads)
-set_target_properties(_cppast_tiny_process PROPERTIES CXX_STANDARD 11)
+                           SYSTEM INTERFACE $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
+
+target_link_libraries(_cppast_tiny_process INTERFACE tiny-process-library::tiny-process-library Threads::Threads)
 
 
 #
 # install cxxopts, if needed
 #
 if(build_tool)
-    message(STATUS "Installing cxxopts via submodule")
-    execute_process(COMMAND git submodule update --init -- external/cxxopts
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    set(CXXOPTS_BUILD_TESTS OFF CACHE BOOL "")
 
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/cxxopts EXCLUDE_FROM_ALL)
+    message(STATUS "Fetching cxxopts")
+    FetchContent_Declare(cxxopts URL https://github.com/jarro2783/cxxopts/archive/v2.2.1.zip)
+    FetchContent_MakeAvailable(cxxopts)
 endif()
 
 #
@@ -152,7 +156,7 @@ function(_cppast_find_llvm_config)
         find_program(LLVM_CONFIG_BINARY "llvm-config" "${LLVM_DOWNLOAD_DIR}/bin" NO_DEFAULT_PATH)
     else()
         find_program(llvm_config_binary_no_suffix llvm-config)
-        find_program(llvm_config_binary_suffix NAMES llvm-config-7 llvm-config-6.0 llvm-config-5.0 llvm-config-4.0)
+        find_program(llvm_config_binary_suffix NAMES llvm-config-10 llvm-config-9 llvm-config-8 llvm-config-7 llvm-config-6.0 llvm-config-5.0 llvm-config-4.0)
 
         if(NOT llvm_config_binary_no_suffix)
             set(LLVM_CONFIG_BINARY ${llvm_config_binary_suffix} CACHE INTERNAL "")
@@ -300,12 +304,7 @@ endif()
 
 
 message(STATUS "_cppast_libclang(external)")
-# if (UNIX)
-#    install(TARGETS _cppast_libclang EXPORT ${targets_export_name})
-#    # install(TARGETS _cppast_libclang EXPORT ${targets_export_name} DESTINATION ${CMAKE_INSTALL_LIBDIR})
-# else (UNIX)
-    install(TARGETS _cppast_libclang EXPORT ${targets_export_name}
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-# endif(UNIX)
+install(TARGETS _cppast_libclang EXPORT ${targets_export_name}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
